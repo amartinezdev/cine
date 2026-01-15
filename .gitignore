@@ -1,0 +1,54 @@
+# =========================
+# Laravel
+# =========================
+
+/vendor/
+/node_modules/
+/public/build/
+/public/hot
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/bootstrap/cache/*
+
+# Permitir algunos archivos necesarios
+!/storage/framework/.gitignore
+!/storage/logs/.gitignore
+!/storage/framework/cache/.gitignore
+!/storage/framework/sessions/.gitignore
+!/storage/framework/views/.gitignore
+!/bootstrap/cache/.gitignore
+
+# =========================
+# Entorno
+# =========================
+
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+
+# =========================
+# IDE / Editor
+# =========================
+
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# =========================
+# Sistema
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Testing
+# =========================
+
+/coverage
+
