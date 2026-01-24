@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PeliculasController;
 use App\Http\Controllers\Admin\GeneroController;
 use App\Http\Controllers\Admin\PeliculaController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', [PeliculasController::class, 'index'])->name('inicio');
+
+Route::get('/pelicula/{id}', [PeliculasController::class, 'mostrarPagina'])->name('pelicula.mostrarPagina');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
