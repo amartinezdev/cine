@@ -21,6 +21,12 @@ Route::get('/', [PeliculasController::class, 'index'])->name('inicio');
 
 Route::get('/pelicula/{id}', [PeliculasController::class, 'mostrarPagina'])->name('pelicula.mostrarPagina');
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
