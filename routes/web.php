@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PeliculasController;
 use App\Http\Controllers\Admin\GeneroController;
 use App\Http\Controllers\Admin\PeliculaController;
+use App\Http\Controllers\Admin\PromocionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('peliculas/{id}', [PeliculaController::class, 'delete'])->name("peliculas.delete");
     Route::get('peliculas/edit/{id}', [PeliculaController::class, 'edit'])->name("peliculas.edit");
     Route::put('peliculas/{id}', [PeliculaController::class, 'actualizar'])->name('peliculas.actualizar');
+
+    Route::get('promociones', [PromocionController::class, 'index'])->name("promociones.index");
+    Route::get('promociones/create', [PromocionController::class, 'create'])->name("promociones.create");
+    Route::post('promociones', [PromocionController::class, 'crear'])->name("promociones.crear");
+    Route::delete('promociones/{id}', [PromocionController::class, 'delete'])->name("promociones.delete");
+    Route::get('promociones/edit/{id}', [PromocionController::class, 'edit'])->name("promociones.edit");
+    Route::put('promociones/{id}', [PromocionController::class, 'actualizar'])->name('promociones.actualizar');
 });
 
 require __DIR__ . '/auth.php';
