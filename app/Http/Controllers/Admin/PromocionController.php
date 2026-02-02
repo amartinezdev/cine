@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Promocion;
 use Illuminate\Http\Request;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class PromocionController extends Controller
 {
@@ -41,7 +42,28 @@ class PromocionController extends Controller
         $newItem->fecha_fin = $request->input('fecha_fin');
         $newItem->save();
 
+        // Enviar notificación por Telegram
+        $this->enviarTelegram($newItem);
+
         return redirect()->route('promociones.index')->with('info', 'Promoción creada con éxito.');
+    }
+
+    // Enviar mensaje de Telegram con la nueva promoción
+    private function enviarTelegram(Promocion $promocion)
+    {
+        $chatId = env('TELEGRAM_CHAT_ID');
+
+        $mensaje = "*¡NUEVA PROMOCIÓN EN CINES PORDEDE!*\n\n";
+        $mensaje .= "📌 *{$promocion->titulo}*\n\n";
+        $mensaje .= "📝 {$promocion->mensaje}\n\n";
+        $mensaje .= "📅 Válido desde: {$promocion->fecha_inicio->format('d/m/Y H:i')}\n";
+        $mensaje .= "📅 Hasta: {$promocion->fecha_fin->format('d/m/Y H:i')}";
+
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => $mensaje,
+            'parse_mode' => 'Markdown'
+        ]);
     }
 
     // Mostrar formulario para EDITAR
