@@ -52,3 +52,6 @@ Thumbs.db
 
 /coverage
 
+# Carpeta duplicada de imagenes, no se usa en el seeder
+/database/seeders/images_copy/
+
