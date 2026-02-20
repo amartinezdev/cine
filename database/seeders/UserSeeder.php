@@ -16,36 +16,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // Cuentas de demostración: se recrean cada noche junto con el resto de datos.
+        // Las credenciales se muestran también en la pantalla de login.
         $usuarios = [
             [
-                'name' => 'Administrador',
-                'email' => '1@gmail.com',
-                'password' => Hash::make('1'),
+                'name' => 'Admin Demo',
+                'email' => 'admin@demo.com',
+                'password' => Hash::make('CineDemo2026!'),
                 'admin' => true,
             ],
-
             [
-                'name' => 'Álvaro',
-                'email' => 'alvaro@gmail.com',
-                'password' => Hash::make('1'),
-                'admin' => false,
-            ],
-            [
-                'name' => 'Uri Malo',
-                'email' => 'uri@gmail.com',
-                'password' => Hash::make('1'),
-                'admin' => false,
-            ],
-            [
-                'name' => 'Edu',
-                'email' => 'edu@gmail.com',
-                'password' => Hash::make('1'),
-                'admin' => false,
-            ],
-            [
-                'name' => 'Hamza',
-                'email' => 'hamza@gmail.com',
-                'password' => Hash::make('1'),
+                'name' => 'Usuario Demo',
+                'email' => 'user@demo.com',
+                'password' => Hash::make('CineDemo2026!'),
                 'admin' => false,
             ],
         ];

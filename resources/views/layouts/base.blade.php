@@ -9,6 +9,8 @@
 </head>
 <body class="bg-black">
 
+    <x-demo-disclaimer />
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-danger">
         <div class="container">

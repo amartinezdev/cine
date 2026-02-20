@@ -9,6 +9,14 @@
                     <h3 class="mb-0">Iniciar Sesión</h3>
                 </div>
                 <div class="card-body p-4 text-white">
+                    <div class="alert alert-info small mb-4">
+                        <strong><i class="bi bi-info-circle"></i> Credenciales de prueba</strong>
+                        <div class="mt-2">
+                            <strong>Admin:</strong> admin@demo.com &nbsp;/&nbsp; CineDemo2026!<br>
+                            <strong>Usuario:</strong> user@demo.com &nbsp;/&nbsp; CineDemo2026!
+                        </div>
+                    </div>
+
                     @if($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             @foreach($errors->all() as $error)

@@ -23,9 +23,18 @@ class PeliculaController extends Controller
         return view('admin.peliculas.create', compact('generos'));
     }
 
+    // Numero maximo de peliculas permitidas (evita spam de bots en el entorno de demo)
+    const MAX_PELICULAS = 50;
+
     // GUARDAR nueva película en BD
     public function crear(Request $request)
     {
+        // Límite de películas para evitar que se llene la demo de spam
+        if (pelicula::count() >= self::MAX_PELICULAS) {
+            return redirect()->route('peliculas.index')
+                ->with('error', 'Se ha alcanzado el límite máximo de ' . self::MAX_PELICULAS . ' películas. Elimina alguna antes de crear una nueva.');
+        }
+
         // Validar datos: título, sinopsis, duración, precio, género, imagen
         $request->validate([
             'titulo' => 'required|string|max:255',
@@ -33,7 +42,7 @@ class PeliculaController extends Controller
             'duracion' => 'required|integer|min:1',
             'precio_entrada' => 'required|numeric|min:0',
             'genero_id' => 'required|exists:generos,id',
-            'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
         ]);
 
         // Crear película
@@ -72,7 +81,7 @@ class PeliculaController extends Controller
             'duracion' => 'required|integer|min:1',
             'precio_entrada' => 'required|numeric|min:0',
             'genero_id' => 'required|exists:generos,id',
-            'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
         ]);
 
         // Actualizar película
