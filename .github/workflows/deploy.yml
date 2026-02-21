@@ -11,11 +11,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # vendor/ NO se toca aqui a proposito: se gestiona a mano por FTP.
-      # Subir vendor/ (miles de archivos) por FTP en cada push es demasiado
-      # lento en este hosting. Si cambias una dependencia en composer.json,
-      # genera vendor/ en local (composer install --no-dev) y subelo tu
-      # mismo a laravel_apps/cine/vendor por FTP, como la primera vez.
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Instalar dependencias de Composer
+        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
 
       - name: Configurar Node
         uses: actions/setup-node@v4
