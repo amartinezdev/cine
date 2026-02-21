@@ -1,0 +1,87 @@
+name: Deploy a cPanel
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Instalar dependencias de Composer
+        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias de npm y compilar assets
+        run: |
+          npm ci
+          npm run build
+
+      - name: Preparar carpeta de la aplicacion (cine_app)
+        run: |
+          mkdir -p deploy_stage/cine_app
+          rsync -a \
+            --exclude='public' \
+            --exclude='tests' \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='deploy' \
+            --exclude='node_modules' \
+            --exclude='.env' \
+            --exclude='.env.example' \
+            --exclude='.editorconfig' \
+            --exclude='.gitattributes' \
+            --exclude='.gitignore' \
+            --exclude='phpunit.xml' \
+            --exclude='README.md' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='vite.config.js' \
+            --exclude='tailwind.config.js' \
+            --exclude='postcss.config.js' \
+            --exclude='deploy_stage' \
+            ./ deploy_stage/cine_app/
+          cp deploy/app.bootstrap.php deploy_stage/cine_app/bootstrap/app.php
+
+      - name: Preparar carpeta publica (public_html)
+        run: |
+          mkdir -p deploy_stage/public_html
+          cp -r public/build deploy_stage/public_html/build
+          cp public/.htaccess deploy_stage/public_html/.htaccess
+          cp public/favicon.ico deploy_stage/public_html/favicon.ico
+          cp public/robots.txt deploy_stage/public_html/robots.txt
+          cp deploy/index.public_html.php deploy_stage/public_html/index.php
+
+      - name: Desplegar cine_app por FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.CPANEL_FTP_HOST }}
+          username: ${{ secrets.CPANEL_FTP_USER }}
+          password: ${{ secrets.CPANEL_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: deploy_stage/cine_app/
+          server-dir: cine_app/
+          dangerous-clean-slate: false
+
+      - name: Desplegar public_html por FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.CPANEL_FTP_HOST }}
+          username: ${{ secrets.CPANEL_FTP_USER }}
+          password: ${{ secrets.CPANEL_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: deploy_stage/public_html/
+          server-dir: public_html/
+          dangerous-clean-slate: false
