@@ -38,7 +38,10 @@ class pelicula extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->width(300)
-            ->height(450);
+            ->height(450)
+            // Sin esto, Glide intenta auto-orientar leyendo EXIF, y falla
+            // en hostings sin la extension exif habilitada.
+            ->orientation('0');
     }
 
     // Obtener URL de la imagen del poster
