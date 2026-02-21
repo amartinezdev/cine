@@ -55,3 +55,5 @@ Thumbs.db
 # Carpeta duplicada de imagenes, no se usa en el seeder
 /database/seeders/images_copy/
 
+*.7z
+*.zip
