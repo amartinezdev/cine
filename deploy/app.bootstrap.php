@@ -33,9 +33,14 @@ $app = new Illuminate\Foundation\Application(
 | copia el workflow de GitHub Actions); en local se sigue usando el
 | bootstrap/app.php estandar del repositorio.
 |
+| Nota: usamos el binding 'path.public' directamente en vez del metodo
+| usePublicPath() porque esta version de Laravel 9 (9.x-dev, anterior a
+| la 9.37) no lo tiene todavia. public_path() internamente resuelve este
+| binding, asi que el efecto es el mismo.
+|
 */
 
-$app->usePublicPath(dirname(__DIR__) . '/../../public_html/cine');
+$app->instance('path.public', dirname(__DIR__) . '/../../public_html/cine');
 
 /*
 |--------------------------------------------------------------------------
