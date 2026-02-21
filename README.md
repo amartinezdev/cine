@@ -101,12 +101,21 @@ En producción, basta con añadir la siguiente entrada al cron del servidor:
 
 ### Usuarios de prueba
 
-El seeder crea un usuario administrador y varios usuarios normales (contraseña `1` para todos):
+El seeder crea dos cuentas fijas para poder probar tanto la parte pública como el panel de administración:
 
-| Rol           | Email             |
-| ------------- | ----------------- |
-| Administrador | `1@gmail.com`      |
-| Usuario       | `alvaro@gmail.com` |
+| Rol           | Email               | Contraseña      |
+| ------------- | ------------------- | --------------- |
+| Administrador | `admin@demo.com`    | `CineDemo2026!` |
+| Usuario       | `user@demo.com`     | `CineDemo2026!` |
+
+### Entorno de demo (despliegue en producción)
+
+La instancia desplegada de este proyecto es un entorno de **demostración pública**: cualquier visitante puede iniciar sesión con las cuentas de arriba y crear/editar/borrar películas, géneros y promociones. Para que la demo siempre esté presentable, se aplican varias medidas:
+
+- **Reset diario**: un cron job ejecuta cada noche a las 00:00 un script protegido por token (ver `deploy/_reset.php.example`) que hace `migrate:fresh --seed`, devolviendo la base de datos exactamente al estado inicial (géneros, películas y las 2 cuentas de arriba). Un aviso visible en toda la web informa de esto a los visitantes.
+- **Protección anti-abuso**: el script de reset tiene un *cooldown* (ver la constante `COOLDOWN_SECONDS` en el ejemplo) — aunque alguien conozca el token y lo llame en bucle, el trabajo pesado (migrar + sembrar + procesar imágenes) solo se ejecuta como mucho una vez por ventana de tiempo; el resto de peticiones se rechazan al instante.
+- **Límite de contenido**: como medida anti-spam de bots, el número máximo de películas creables está limitado (`PeliculaController::MAX_PELICULAS`) y las imágenes de póster no pueden superar 1 MB.
+- **Despliegue continuo**: cada `push` a `main` se despliega automáticamente vía GitHub Actions (`.github/workflows/deploy.yml`). Los archivos en `deploy/` son plantillas usadas solo en ese despliegue (rutas adaptadas al hosting), no se usan en local.
 
 ## Estructura del proyecto
 

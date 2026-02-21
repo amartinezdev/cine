@@ -1,0 +1,68 @@
+<?php
+// Script de reset diario del entorno de demo.
+// Se llama por cron cada dia a las 00:00 (ver README para instrucciones).
+// Deja el mismo estado siempre: migra desde cero, siembra generos, peliculas
+// y las 2 cuentas de demo (admin@demo.com / user@demo.com), y crea el enlace
+// de storage para que se vean los posters.
+//
+// COPIA este archivo como "_reset.php" DIRECTAMENTE en el servidor (dentro
+// de la carpeta publica), cambia $secret por un token propio y aleatorio, y
+// NUNCA lo subas a git asi relleno: es lo unico que protege el endpoint.
+//
+// Generar un token aleatorio: openssl rand -hex 20
+//
+// Ubicacion en el servidor: <carpeta publica>/_reset.php
+// App en:                    <carpeta de la app>/
+
+@set_time_limit(300);
+@ini_set('max_execution_time', '300');
+@ini_set('memory_limit', '512M');
+
+$secret = 'CHANGE_ME_genera_un_token_aleatorio_largo';
+
+if (!hash_equals($secret, $_GET['key'] ?? '')) {
+    http_response_code(404);
+    exit('Not found');
+}
+
+// Cooldown anti-abuso: aunque alguien tenga la key y la llame en bucle,
+// el trabajo pesado (migrar + sembrar + procesar imagenes) solo se ejecuta
+// como mucho una vez cada COOLDOWN_SECONDS. El resto de peticiones dentro
+// de esa ventana se rechazan al instante, sin tocar la base de datos.
+const COOLDOWN_SECONDS = 1800; // 30 minutos
+
+$lockFile = __DIR__ . '/../../laravel_apps/cine/storage/framework/.reset_lock';
+
+if (file_exists($lockFile) && (time() - filemtime($lockFile)) < COOLDOWN_SECONDS) {
+    $restante = COOLDOWN_SECONDS - (time() - filemtime($lockFile));
+    http_response_code(429);
+    header('Content-Type: text/plain; charset=utf-8');
+    exit("Reset ya ejecutado hace poco. Prueba en {$restante} segundos.\n");
+}
+
+@touch($lockFile);
+
+require __DIR__ . '/../../laravel_apps/cine/vendor/autoload.php';
+
+$app = require __DIR__ . '/../../laravel_apps/cine/bootstrap/app.php';
+
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+
+header('Content-Type: text/plain; charset=utf-8');
+
+function run($comando, $params = [])
+{
+    echo "\n\$ php artisan {$comando}\n";
+    Illuminate\Support\Facades\Artisan::call($comando, $params);
+    echo Illuminate\Support\Facades\Artisan::output();
+}
+
+try {
+    run('migrate:fresh', ['--seed' => true, '--force' => true]);
+    run('storage:link');
+    echo "\nReset completado: " . date('Y-m-d H:i:s') . "\n";
+} catch (\Throwable $e) {
+    echo "ERROR: " . $e->getMessage() . "\n";
+    echo $e->getTraceAsString() . "\n";
+}
