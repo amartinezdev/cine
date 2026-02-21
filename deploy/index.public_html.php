@@ -11,7 +11,7 @@ define('LARAVEL_START', microtime(true));
 |--------------------------------------------------------------------------
 */
 
-if (file_exists($maintenance = __DIR__.'/../cine_app/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__.'/../../laravel_apps/cine/storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -21,14 +21,15 @@ if (file_exists($maintenance = __DIR__.'/../cine_app/storage/framework/maintenan
 |--------------------------------------------------------------------------
 |
 | Este index.php sustituye al public/index.php estandar SOLO en el
-| despliegue (lo copia el workflow de GitHub Actions), porque la app de
-| Laravel vive en la carpeta "cine_app", hermana de esta carpeta publica
-| (public_html), en vez de un nivel por encima como en una instalacion
-| estandar.
+| despliegue (lo copia el workflow de GitHub Actions). Estructura real
+| en cPanel:
+|
+|   /home/alvaroma/laravel_apps/cine/   <- esta app
+|   /home/alvaroma/public_html/cine/    <- este archivo vive aqui
 |
 */
 
-require __DIR__.'/../cine_app/vendor/autoload.php';
+require __DIR__.'/../../laravel_apps/cine/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ require __DIR__.'/../cine_app/vendor/autoload.php';
 |--------------------------------------------------------------------------
 */
 
-$app = require_once __DIR__.'/../cine_app/bootstrap/app.php';
+$app = require_once __DIR__.'/../../laravel_apps/cine/bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 

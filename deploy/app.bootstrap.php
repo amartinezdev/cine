@@ -21,10 +21,13 @@ $app = new Illuminate\Foundation\Application(
 |--------------------------------------------------------------------------
 |
 | En este despliegue, la carpeta "public" de Laravel NO es el document
-| root: el document root real es "public_html", que vive un nivel por
-| encima de esta app (como carpeta hermana). Le decimos a Laravel donde
-| esta esa carpeta publica de verdad para que asset(), storage:link, etc.
-| apunten al sitio correcto.
+| root. La estructura real en cPanel es:
+|
+|   /home/alvaroma/laravel_apps/cine/   <- esta app (APP_ROOT)
+|   /home/alvaroma/public_html/cine/    <- document root real
+|
+| Le decimos a Laravel donde esta esa carpeta publica de verdad para que
+| asset(), storage:link, etc. apunten al sitio correcto.
 |
 | Este archivo sustituye a bootstrap/app.php SOLO en el despliegue (lo
 | copia el workflow de GitHub Actions); en local se sigue usando el
@@ -32,7 +35,7 @@ $app = new Illuminate\Foundation\Application(
 |
 */
 
-$app->usePublicPath(dirname(__DIR__) . '/../public_html');
+$app->usePublicPath(dirname(__DIR__) . '/../../public_html/cine');
 
 /*
 |--------------------------------------------------------------------------

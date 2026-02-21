@@ -64,7 +64,7 @@ jobs:
           cp public/robots.txt deploy_stage/public_html/robots.txt
           cp deploy/index.public_html.php deploy_stage/public_html/index.php
 
-      - name: Desplegar cine_app por FTPS
+      - name: Desplegar app por FTPS (laravel_apps/cine)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.CPANEL_FTP_HOST }}
@@ -72,10 +72,10 @@ jobs:
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
           protocol: ftps
           local-dir: deploy_stage/cine_app/
-          server-dir: cine_app/
+          server-dir: laravel_apps/cine/
           dangerous-clean-slate: false
 
-      - name: Desplegar public_html por FTPS
+      - name: Desplegar archivos publicos por FTPS (public_html/cine)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.CPANEL_FTP_HOST }}
@@ -83,5 +83,5 @@ jobs:
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
           protocol: ftps
           local-dir: deploy_stage/public_html/
-          server-dir: public_html/
+          server-dir: public_html/cine/
           dangerous-clean-slate: false
