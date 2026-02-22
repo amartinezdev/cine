@@ -38,6 +38,8 @@
 .vscode/
 *.sublime-workspace
 *.sublime-project
+.claude/
+.agents/
 
 # =========================
 # Sistema
