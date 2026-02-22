@@ -40,6 +40,7 @@
 *.sublime-project
 .claude/
 .agents/
+CLAUDE.md
 
 # =========================
 # Sistema
