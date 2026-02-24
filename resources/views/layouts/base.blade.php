@@ -3,11 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pordede - Plataforma de Cine</title>
+    <meta name="description" content="@yield('meta_description', 'Cartelera de cine online: descubre películas, horarios y promociones.')">
+    <title>@yield('title', 'Pordede - Plataforma de Cine')</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --pd-bg: #0a0a0c;
+            --pd-accent: #e5122e;
+            --pd-radius-md: 10px;
+            --pd-radius-lg: 16px;
+            --pd-shadow: 0 10px 30px -10px rgba(0, 0, 0, .65);
+        }
+
+        body {
+            background-color: var(--pd-bg) !important;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, .navbar-brand {
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .navbar-brand {
+            letter-spacing: .08em;
+            font-weight: 800;
+        }
+
+        a, .btn, .card, .nav-link, .card-img-top {
+            transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease, opacity .2s ease;
+        }
+
+        .btn:hover { transform: translateY(-1px); }
+        .btn:active { transform: translateY(0) scale(.97); }
+
+        .card {
+            border-radius: var(--pd-radius-md);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--pd-shadow);
+        }
+
+        .card:hover .card-img-top { transform: scale(1.04); }
+
+        a:focus-visible,
+        .btn:focus-visible,
+        .form-control:focus-visible,
+        .form-select:focus-visible {
+            outline: 2px solid var(--pd-accent);
+            outline-offset: 2px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 1rem;
+            z-index: 2000;
+            background: var(--pd-accent);
+            color: #fff;
+            padding: .5rem 1rem;
+            border-radius: 0 0 var(--pd-radius-md) var(--pd-radius-md);
+            text-decoration: none;
+            transition: top .2s ease;
+        }
+
+        .skip-link:focus { top: 0; }
+
+        @keyframes pd-fade-up {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        .pd-animate-in {
+            animation: pd-fade-up .5s ease both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
+            .pd-animate-in { animation: none !important; }
+            a, .btn, .card, .nav-link, .card-img-top { transition: none !important; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
 <body class="bg-black">
+
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido</a>
 
     <x-demo-disclaimer />
 
@@ -99,7 +189,7 @@
     @endif
 
     <!-- main -->
-    <main class="pb-5">
+    <main id="contenido-principal" class="pb-5 position-relative">
         @yield('content')
     </main>
 
