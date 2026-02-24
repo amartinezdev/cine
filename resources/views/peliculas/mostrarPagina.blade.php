@@ -1,7 +1,44 @@
 @extends('layouts.base')
+@section('title', $pelicula->titulo . ' - Pordede')
+@section('meta_description', Str::limit($pelicula->sipnosis, 150))
 @section('content')
 
-<div class="container py-4">
+@php
+    $posterUrl = $pelicula->getFirstMediaUrl('poster');
+@endphp
+
+@if($posterUrl)
+    <div class="pd-backdrop-wrap">
+        <div class="pd-backdrop" style="background-image: url('{{ $posterUrl }}')"></div>
+    </div>
+    <style>
+        .pd-backdrop-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 420px;
+            overflow: hidden;
+        }
+
+        .pd-backdrop {
+            position: absolute;
+            inset: -20px;
+            background-size: cover;
+            background-position: center 15%;
+            filter: blur(20px) brightness(.45) saturate(1.15);
+        }
+
+        .pd-backdrop-wrap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10, 10, 12, .1) 0%, var(--pd-bg) 92%);
+        }
+    </style>
+@endif
+
+<div class="container py-4 position-relative" style="{{ $posterUrl ? 'padding-top: 3rem;' : '' }}">
     <!-- Migas de pan -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
@@ -56,7 +93,7 @@
                 <div class="col-auto">
                     <div class="bg-dark border border-secondary rounded p-3 text-center">
                         <i class="bi bi-star-fill text-warning fs-4 d-block mb-1"></i>
-                        <span class="text-white fw-bold">8.5</span>
+                        <span class="text-white fw-bold">{{ number_format($pelicula->valoracion, 1) }}</span>
                         <small class="text-secondary d-block">puntuación</small>
                     </div>
                 </div>
