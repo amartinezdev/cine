@@ -1,4 +1,6 @@
 @extends('layouts.base')
+@section('title', 'Pordede - Cartelera de Cine')
+@section('meta_description', 'Explora la cartelera al completo: busca por título o filtra por género y descubre tu próxima película.')
 @section('content')
 
 <div class="container py-4">
@@ -47,7 +49,7 @@
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                     @foreach($peliculasPorGeneroActual as $pelicula)
                         <div class="col">
-                            <div class="card bg-dark border-secondary h-100">
+                            <div class="card bg-dark border-secondary h-100 pd-animate-in" style="animation-delay: {{ min($loop->index, 8) * 0.06 }}s">
                                 <!-- Póster (clickable) -->
                                 <a href="{{ route('pelicula.mostrarPagina', $pelicula->id) }}">
                                     @if($pelicula->getFirstMediaUrl('poster'))
@@ -67,7 +69,7 @@
 
                                     <p class="card-text text-secondary small mb-2">
                                         <i class="bi bi-clock"></i> {{ $pelicula->duracion }} min
-                                        <span class="ms-2"><i class="bi bi-star-fill text-warning"></i> 8.5</span>
+                                        <span class="ms-2"><i class="bi bi-star-fill text-warning"></i> {{ number_format($pelicula->valoracion, 1) }}</span>
                                     </p>
 
                                     <p class="card-text text-secondary small flex-grow-1">

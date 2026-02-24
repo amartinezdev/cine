@@ -44,6 +44,17 @@ class pelicula extends Model implements HasMedia
             ->orientation('0');
     }
 
+    // Valoracion de la pelicula. No tenemos sistema de reseñas todavia,
+    // asi que se calcula de forma estable a partir del titulo (misma
+    // pelicula = misma nota siempre) para no mostrar el mismo numero
+    // en toda la cartelera.
+    public function getValoracionAttribute(): float
+    {
+        $semilla = crc32($this->titulo . '-' . $this->id);
+
+        return round(6.5 + ($semilla % 36) / 10, 1);
+    }
+
     // Obtener URL de la imagen del poster
     public function getPosterUrl()
     {
