@@ -1,12 +1,13 @@
 @extends('layouts.base')
+@section('title', 'Iniciar sesión - Pordede')
 @section('content')
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow-lg">
-                <div class="card-header bg-dark text-white">
-                    <h3 class="mb-0">Iniciar Sesión</h3>
+            <div class="card bg-dark border-secondary shadow-lg">
+                <div class="card-header border-secondary">
+                    <h3 class="mb-0 text-white"><i class="bi bi-box-arrow-in-right text-danger"></i> Iniciar Sesión</h3>
                 </div>
                 <div class="card-body p-4 text-white">
                     <div class="alert alert-info small mb-4">
@@ -69,7 +70,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="card-footer bg-light text-center text-dark">
+                <div class="card-footer border-secondary text-center text-secondary">
                     ¿No tienes cuenta? <a href="{{ route('register') }}" class="text-decoration-none">Regístrate aquí</a>
                 </div>
             </div>

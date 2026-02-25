@@ -1,12 +1,13 @@
 @extends('layouts.base')
+@section('title', 'Crear cuenta - Pordede')
 @section('content')
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow-lg">
-                <div class="card-header bg-dark text-white">
-                    <h3 class="mb-0">Crear Cuenta</h3>
+            <div class="card bg-dark border-secondary shadow-lg">
+                <div class="card-header border-secondary">
+                    <h3 class="mb-0 text-white"><i class="bi bi-person-plus text-danger"></i> Crear Cuenta</h3>
                 </div>
                 <div class="card-body p-4 text-white">
                     @if($errors->any())
@@ -61,7 +62,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="card-footer bg-light text-center text-dark">
+                <div class="card-footer border-secondary text-center text-secondary">
                     Al registrarte, aceptas nuestros términos de servicio
                 </div>
             </div>
