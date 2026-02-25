@@ -1,10 +1,13 @@
 @extends('layouts.base')
+@section('title', 'Editar promoción - Pordede')
 @section('content')
 
-    <div class="container mt-5">
-        <h1 class="mb-4">Editar Promoción</h1>
+    <div class="container py-4">
+        <h1 class="text-white fw-bold mb-4 border-start border-danger border-4 ps-3">
+            <i class="bi bi-pencil"></i> Editar Promoción
+        </h1>
 
-        <div class="card">
+        <div class="card bg-dark border-secondary">
             <div class="card-body">
                 <form action="{{ route('promociones.actualizar', $promocion->id) }}" method="POST">
                     @csrf
@@ -48,8 +51,8 @@
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                        <a href="{{ route('promociones.index') }}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-danger"><i class="bi bi-check-lg"></i> Guardar Cambios</button>
+                        <a href="{{ route('promociones.index') }}" class="btn btn-outline-light"><i class="bi bi-arrow-left"></i> Cancelar</a>
                     </div>
                 </form>
             </div>
