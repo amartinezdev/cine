@@ -58,7 +58,7 @@
                             <a class="text-decoration-none" href="{{ route('login') }}">
                                 ¿Ya tienes cuenta?
                             </a>
-                            <button type="submit" class="btn btn-primary">Registrarse</button>
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-person-plus"></i> Registrarse</button>
                         </div>
                     </form>
                 </div>

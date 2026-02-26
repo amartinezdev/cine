@@ -66,7 +66,7 @@
                                     ¿Olvidaste tu contraseña?
                                 </a>
                             @endif
-                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión</button>
                         </div>
                     </form>
                 </div>
