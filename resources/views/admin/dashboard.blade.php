@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('title', 'Panel de administración - Pordede')
 @section('content')
 
 <div class="container py-4">

@@ -1,4 +1,5 @@
 @extends('layouts.base')
+@section('title', 'Gestionar películas - Pordede')
 @section('content')
 
 <div class="container py-4">
