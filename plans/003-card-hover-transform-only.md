@@ -1,6 +1,6 @@
 # 003 — Stop transitioning box-shadow on card hover
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 02fb2e5
 - **Severity**: MEDIUM
 - **Category**: Performance
