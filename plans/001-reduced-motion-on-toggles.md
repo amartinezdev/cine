@@ -1,6 +1,6 @@
 # 001 — Add prefers-reduced-motion handling to dropdown, dialog, and mobile nav
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 02fb2e5
 - **Severity**: HIGH
 - **Category**: Accessibility

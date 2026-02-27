@@ -18,7 +18,7 @@
     <x-demo-disclaimer />
 
     {{-- Navbar --}}
-    <nav x-data="{ mobileOpen: false }" class="sticky top-0 z-40 border-b border-border/60 bg-card/60 backdrop-blur-md [@media(prefers-reduced-transparency:reduce)]:bg-card [@media(prefers-reduced-transparency:reduce)]:backdrop-blur-none">
+    <nav x-data="{ mobileOpen: false, reduceMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches }" class="sticky top-0 z-40 border-b border-border/60 bg-card/60 backdrop-blur-md [@media(prefers-reduced-transparency:reduce)]:bg-card [@media(prefers-reduced-transparency:reduce)]:backdrop-blur-none">
         <div class="container flex h-16 items-center justify-between">
             <a href="{{ route('inicio') }}" class="flex items-center gap-2 text-lg font-extrabold tracking-wide text-primary">
                 <i class="bi bi-film"></i> PORDEDE
@@ -86,12 +86,12 @@
         <div
             x-show="mobileOpen"
             x-cloak
-            x-transition:enter="transition-[opacity,transform] duration-200 ease-out"
-            x-transition:enter-start="opacity-0 -translate-y-2"
+            :x-transition:enter="reduceMotion ? 'transition-opacity duration-200 ease-out' : 'transition-[opacity,transform] duration-200 ease-out'"
+            :x-transition:enter-start="reduceMotion ? 'opacity-0' : 'opacity-0 -translate-y-2'"
             x-transition:enter-end="opacity-100 translate-y-0"
-            x-transition:leave="transition-[opacity,transform] duration-150 ease-in-out"
+            :x-transition:leave="reduceMotion ? 'transition-opacity duration-150 ease-out' : 'transition-[opacity,transform] duration-150 ease-out'"
             x-transition:leave-start="opacity-100 translate-y-0"
-            x-transition:leave-end="opacity-0 -translate-y-2"
+            :x-transition:leave-end="reduceMotion ? 'opacity-0' : 'opacity-0 -translate-y-2'"
             class="border-t border-border px-4 pb-4 pt-2 md:hidden"
         >
             <div class="flex flex-col gap-1">
