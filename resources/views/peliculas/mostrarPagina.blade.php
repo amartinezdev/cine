@@ -8,194 +8,130 @@
 @endphp
 
 @if($posterUrl)
-    <div class="pd-backdrop-wrap">
-        <div class="pd-backdrop" style="background-image: url('{{ $posterUrl }}')"></div>
+    <div class="absolute inset-x-0 top-0 h-[420px] overflow-hidden">
+        <div class="absolute -inset-5 bg-cover bg-[center_15%] blur-xl brightness-[.45] saturate-150" style="background-image: url('{{ $posterUrl }}')"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-background/10 to-background"></div>
     </div>
-    <style>
-        .pd-backdrop-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 420px;
-            overflow: hidden;
-        }
-
-        .pd-backdrop {
-            position: absolute;
-            inset: -20px;
-            background-size: cover;
-            background-position: center 15%;
-            filter: blur(20px) brightness(.45) saturate(1.15);
-        }
-
-        .pd-backdrop-wrap::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(10, 10, 12, .1) 0%, var(--pd-bg) 92%);
-        }
-    </style>
 @endif
 
-<div class="container py-4 position-relative" style="{{ $posterUrl ? 'padding-top: 3rem;' : '' }}">
-    <!-- Migas de pan -->
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('inicio') }}" class="text-danger text-decoration-none">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('inicio', ['genero_id' => $pelicula->genero_id]) }}" class="text-danger text-decoration-none">{{ $pelicula->genero->nombre }}</a></li>
-            <li class="breadcrumb-item active text-white" aria-current="page">{{ $pelicula->titulo }}</li>
-        </ol>
+<div class="container relative py-4 {{ $posterUrl ? 'pt-12' : '' }}">
+    <nav aria-label="breadcrumb" class="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
+        <a href="{{ route('inicio') }}" class="text-primary hover:underline">Inicio</a>
+        <span>/</span>
+        <a href="{{ route('inicio', ['genero_id' => $pelicula->genero_id]) }}" class="text-primary hover:underline">{{ $pelicula->genero->nombre }}</a>
+        <span>/</span>
+        <span class="text-foreground">{{ $pelicula->titulo }}</span>
     </nav>
 
-    <!-- Detalle de la Película -->
-    <div class="row g-4 mb-5">
-        <!-- Póster -->
-        <div class="col-md-4">
-            <div class="card bg-dark border-secondary">
-                @if($pelicula->getFirstMediaUrl('poster'))
-                    <img src="{{ $pelicula->getFirstMediaUrl('poster') }}" class="card-img-top" alt="{{ $pelicula->titulo }}">
+    <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-12">
+        <div class="md:col-span-4">
+            <x-ui.card class="overflow-hidden">
+                @if($posterUrl)
+                    <img src="{{ $posterUrl }}" alt="{{ $pelicula->titulo }}" class="w-full opacity-0 transition-opacity duration-200 ease-out" onload="this.classList.remove('opacity-0')">
                 @else
-                    <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 500px;">
-                        <i class="bi bi-image text-muted display-1"></i>
+                    <div class="flex h-[500px] items-center justify-center bg-secondary">
+                        <i class="bi bi-image text-6xl text-muted-foreground"></i>
                     </div>
                 @endif
-            </div>
+            </x-ui.card>
         </div>
 
-        <!-- Información -->
-        <div class="col-md-8">
-            <div class="d-flex justify-content-between align-items-start mb-3">
+        <div class="md:col-span-8">
+            <div class="mb-4 flex items-start justify-between gap-4">
                 <div>
-                    <h1 class="text-white fw-bold mb-2">{{ $pelicula->titulo }}</h1>
-                    <span class="badge bg-warning text-dark fs-6">
-                        <i class="bi bi-tags"></i> {{ $pelicula->genero->nombre }}
-                    </span>
+                    <h1 class="mb-2 text-3xl font-bold text-foreground">{{ $pelicula->titulo }}</h1>
+                    <x-ui.badge variant="warning"><i class="bi bi-tags"></i> {{ $pelicula->genero->nombre }}</x-ui.badge>
                 </div>
                 @auth
                     @if(auth()->user()->admin)
-                        <a href="{{ route('peliculas.edit', $pelicula->id) }}" class="btn btn-outline-warning">
-                            <i class="bi bi-pencil"></i> Editar
-                        </a>
+                        <x-ui.button href="{{ route('peliculas.edit', $pelicula->id) }}" variant="outline"><i class="bi bi-pencil"></i> Editar</x-ui.button>
                     @endif
                 @endauth
             </div>
 
-            <!-- Estadísticas -->
-            <div class="row g-3 mb-4">
-                <div class="col-auto">
-                    <div class="bg-dark border border-secondary rounded p-3 text-center">
-                        <i class="bi bi-clock text-danger fs-4 d-block mb-1"></i>
-                        <span class="text-white fw-bold">{{ $pelicula->duracion }}</span>
-                        <small class="text-secondary d-block">minutos</small>
-                    </div>
+            <div class="mb-6 flex flex-wrap gap-3">
+                <div class="rounded-lg border border-border bg-card p-3 text-center">
+                    <i class="bi bi-clock mb-1 block text-xl text-primary"></i>
+                    <span class="font-bold text-foreground">{{ $pelicula->duracion }}</span>
+                    <span class="block text-xs text-muted-foreground">minutos</span>
                 </div>
-                <div class="col-auto">
-                    <div class="bg-dark border border-secondary rounded p-3 text-center">
-                        <i class="bi bi-star-fill text-warning fs-4 d-block mb-1"></i>
-                        <span class="text-white fw-bold">{{ number_format($pelicula->valoracion, 1) }}</span>
-                        <small class="text-secondary d-block">puntuación</small>
-                    </div>
+                <div class="rounded-lg border border-border bg-card p-3 text-center">
+                    <i class="bi bi-star-fill mb-1 block text-xl text-warning"></i>
+                    <span class="font-bold text-foreground">{{ number_format($pelicula->valoracion, 1) }}</span>
+                    <span class="block text-xs text-muted-foreground">puntuación</span>
                 </div>
-                <div class="col-auto">
-                    <div class="bg-danger rounded p-3 text-center">
-                        <i class="bi bi-ticket-perforated text-white fs-4 d-block mb-1"></i>
-                        <span class="text-white fw-bold">{{ number_format($pelicula->precio_entrada, 2) }}€</span>
-                        <small class="text-white-50 d-block">entrada</small>
-                    </div>
+                <div class="rounded-lg bg-primary p-3 text-center">
+                    <i class="bi bi-ticket-perforated mb-1 block text-xl text-primary-foreground"></i>
+                    <span class="font-bold text-primary-foreground">{{ number_format($pelicula->precio_entrada, 2) }}€</span>
+                    <span class="block text-xs text-primary-foreground/80">entrada</span>
                 </div>
             </div>
 
-            <!-- Sinopsis -->
-            <div class="mb-4">
-                <h4 class="text-white border-start border-danger border-4 ps-3 mb-3">Sinopsis</h4>
-                <p class="text-secondary lead">{{ $pelicula->sipnosis }}</p>
+            <div class="mb-6">
+                <h4 class="mb-3 border-l-4 border-primary pl-3 text-lg font-semibold text-foreground">Sinopsis</h4>
+                <p class="text-lg leading-relaxed text-muted-foreground">{{ $pelicula->sipnosis }}</p>
             </div>
 
-            <!-- Acciones -->
-            <div class="d-flex gap-3">
-                <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#modalConstruccion">
-                    <i class="bi bi-ticket-perforated"></i> Comprar Entrada
-                </button>
-                <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#modalConstruccion">
-                    <i class="bi bi-heart"></i> Añadir a Favoritos
-                </button>
-                <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#modalConstruccion">
-                    <i class="bi bi-share"></i> Compartir
-                </button>
+            <div class="flex flex-wrap gap-3">
+                <x-ui.dialog>
+                    <x-slot:trigger>
+                        <x-ui.button size="lg" type="button"><i class="bi bi-ticket-perforated"></i> Comprar Entrada</x-ui.button>
+                    </x-slot:trigger>
+                    <div class="p-6 text-center">
+                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning"></i>
+                        <p class="mb-2 text-lg font-semibold text-foreground">Esta funcionalidad está en desarrollo</p>
+                        <p class="text-sm text-muted-foreground">Estamos trabajando para ofrecerte esta característica muy pronto. ¡Gracias por tu paciencia!</p>
+                        <x-ui.button @click="open = false" class="mt-4">Entendido</x-ui.button>
+                    </div>
+                </x-ui.dialog>
+
+                <x-ui.dialog>
+                    <x-slot:trigger>
+                        <x-ui.button size="lg" variant="outline" type="button"><i class="bi bi-heart"></i> Añadir a Favoritos</x-ui.button>
+                    </x-slot:trigger>
+                    <div class="p-6 text-center">
+                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning"></i>
+                        <p class="mb-2 text-lg font-semibold text-foreground">Esta funcionalidad está en desarrollo</p>
+                        <p class="text-sm text-muted-foreground">Estamos trabajando para ofrecerte esta característica muy pronto. ¡Gracias por tu paciencia!</p>
+                        <x-ui.button @click="open = false" class="mt-4">Entendido</x-ui.button>
+                    </div>
+                </x-ui.dialog>
+
+                <x-ui.dialog>
+                    <x-slot:trigger>
+                        <x-ui.button size="lg" variant="outline" type="button"><i class="bi bi-share"></i> Compartir</x-ui.button>
+                    </x-slot:trigger>
+                    <div class="p-6 text-center">
+                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning"></i>
+                        <p class="mb-2 text-lg font-semibold text-foreground">Esta funcionalidad está en desarrollo</p>
+                        <p class="text-sm text-muted-foreground">Estamos trabajando para ofrecerte esta característica muy pronto. ¡Gracias por tu paciencia!</p>
+                        <x-ui.button @click="open = false" class="mt-4">Entendido</x-ui.button>
+                    </div>
+                </x-ui.dialog>
             </div>
         </div>
     </div>
 
-    <!-- Modal En Construcción -->
-    <div class="modal fade" id="modalConstruccion" tabindex="-1" aria-labelledby="modalConstruccionLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark border-secondary">
-                <div class="modal-header border-secondary">
-                    <h5 class="modal-title text-warning" id="modalConstruccionLabel">
-                        <i class="bi bi-cone-striped"></i> En Construcción
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <i class="bi bi-gear-wide-connected text-warning display-1 mb-3 d-block"></i>
-                    <p class="text-white fs-5 mb-2">Esta funcionalidad está en desarrollo</p>
-                    <p class="text-secondary">Estamos trabajando para ofrecerte esta característica muy pronto. ¡Gracias por tu paciencia!</p>
-                </div>
-                <div class="modal-footer border-secondary justify-content-center">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                        <i class="bi bi-check-lg"></i> Entendido
-                    </button>
-                </div>
+    <x-ui.card class="mb-12">
+        <x-ui.card.header>
+            <x-ui.card.title><i class="bi bi-info-circle text-primary"></i> Información Adicional</x-ui.card.title>
+        </x-ui.card.header>
+        <x-ui.card.content class="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div>
+                <p class="mb-2"><span class="text-muted-foreground">Género:</span> <span class="text-foreground">{{ $pelicula->genero->nombre }}</span></p>
+                <p class="mb-2"><span class="text-muted-foreground">Duración:</span> <span class="text-foreground">{{ $pelicula->duracion }} minutos</span></p>
             </div>
-        </div>
-    </div>
-
-    <!-- Información Adicional -->
-    <div class="row g-4 mb-5">
-        <div class="col-md-12">
-            <div class="card bg-dark border-secondary">
-                <div class="card-header bg-dark border-secondary">
-                    <h5 class="mb-0 text-white"><i class="bi bi-info-circle text-danger"></i> Información Adicional</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p class="mb-2">
-                                <span class="text-secondary">Género:</span>
-                                <span class="text-white">{{ $pelicula->genero->nombre }}</span>
-                            </p>
-                            <p class="mb-2">
-                                <span class="text-secondary">Duración:</span>
-                                <span class="text-white">{{ $pelicula->duracion }} minutos</span>
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                            <p class="mb-2">
-                                <span class="text-secondary">Precio entrada:</span>
-                                <span class="text-white">{{ number_format($pelicula->precio_entrada, 2) }}€</span>
-                            </p>
-                            <p class="mb-2">
-                                <span class="text-secondary">Clasificación:</span>
-                                <span class="text-white">Todos los públicos</span>
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                            <p class="mb-2">
-                                <span class="text-secondary">Añadida:</span>
-                                <span class="text-white">{{ $pelicula->created_at->format('d/m/Y') }}</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <p class="mb-2"><span class="text-muted-foreground">Precio entrada:</span> <span class="text-foreground">{{ number_format($pelicula->precio_entrada, 2) }}€</span></p>
+                <p class="mb-2"><span class="text-muted-foreground">Clasificación:</span> <span class="text-foreground">Todos los públicos</span></p>
             </div>
-        </div>
-    </div>
+            <div>
+                <p class="mb-2"><span class="text-muted-foreground">Añadida:</span> <span class="text-foreground">{{ $pelicula->created_at->format('d/m/Y') }}</span></p>
+            </div>
+        </x-ui.card.content>
+    </x-ui.card>
 
-    <!-- Botón Volver -->
-    <a href="{{ route('inicio') }}" class="btn btn-outline-light">
-        <i class="bi bi-arrow-left"></i> Volver al catálogo
-    </a>
+    <x-ui.button href="{{ route('inicio') }}" variant="outline"><i class="bi bi-arrow-left"></i> Volver al catálogo</x-ui.button>
 </div>
 
 @endsection

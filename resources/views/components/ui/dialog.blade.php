@@ -1,5 +1,5 @@
-<div x-data="{ open: false }" x-on:keydown.escape.window="open = false">
-    <span @click="open = true">{{ $trigger }}</span>
+<div x-data="{ open: false }" x-on:keydown.escape.window="open = false" {{ $attributes }}>
+    <span class="contents" @click="open = true">{{ $trigger }}</span>
 
     <template x-teleport="body">
         <div x-show="open" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
