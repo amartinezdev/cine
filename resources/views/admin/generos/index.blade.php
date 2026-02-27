@@ -2,65 +2,45 @@
 @section('title', 'Gestionar géneros - Pordede')
 @section('content')
 
-<div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="text-white fw-bold border-start border-warning border-4 ps-3">Gestionar Géneros</h1>
-        <a href="{{ route('generos.create') }}" class="btn btn-warning">
-            <i class="bi bi-plus-lg"></i> Añadir Género
-        </a>
+<div class="container py-8">
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="border-l-4 border-warning pl-3 text-2xl font-bold text-foreground">Gestionar Géneros</h1>
+        <x-ui.button href="{{ route('generos.create') }}" class="bg-warning text-warning-foreground hover:bg-warning/90"><i class="bi bi-plus-lg"></i> Añadir Género</x-ui.button>
     </div>
 
     @if(session('info'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="bi bi-check-circle"></i> {{ session('info') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+        <x-ui.alert variant="success" dismissible class="mb-5"><i class="bi bi-check-circle mt-0.5"></i> <p>{{ session('info') }}</p></x-ui.alert>
     @endif
 
     @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="bi bi-exclamation-triangle"></i> {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+        <x-ui.alert variant="destructive" dismissible class="mb-5"><i class="bi bi-exclamation-triangle mt-0.5"></i> <p>{{ session('error') }}</p></x-ui.alert>
     @endif
 
     @if($generos->count() > 0)
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($generos as $genero)
-                <div class="col">
-                    <div class="card bg-dark border-warning h-100">
-                        <div class="card-body">
-                            <h5 class="card-title text-white">
-                                <i class="bi bi-tags text-warning"></i> {{ $genero->nombre }}
-                            </h5>
-                            <p class="card-text text-secondary">
-                                <i class="bi bi-film"></i> {{ $genero->peliculas->count() }} películas
-                            </p>
-                            <div class="d-flex gap-2">
-                                <a href="{{ route('generos.edit', $genero->id) }}" class="btn btn-outline-warning btn-sm flex-grow-1">
-                                    <i class="bi bi-pencil"></i> Editar
-                                </a>
-                                <form action="{{ route('generos.delete', $genero->id) }}" method="POST" class="flex-grow-1" onsubmit="return confirm('¿Eliminar este género?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                        <i class="bi bi-trash"></i> Eliminar
-                                    </button>
-                                </form>
-                            </div>
+                <x-ui.card hover class="border-l-4 border-l-warning">
+                    <x-ui.card.content class="p-5">
+                        <h5 class="mb-1 text-lg font-semibold text-foreground"><i class="bi bi-tags text-warning"></i> {{ $genero->nombre }}</h5>
+                        <p class="mb-4 text-sm text-muted-foreground"><i class="bi bi-film"></i> {{ $genero->peliculas->count() }} películas</p>
+                        <div class="flex gap-2">
+                            <x-ui.button href="{{ route('generos.edit', $genero->id) }}" variant="outline" size="sm" class="flex-1"><i class="bi bi-pencil"></i> Editar</x-ui.button>
+                            <form action="{{ route('generos.delete', $genero->id) }}" method="POST" class="flex-1" onsubmit="return confirm('¿Eliminar este género?');">
+                                @csrf
+                                @method('DELETE')
+                                <x-ui.button type="submit" variant="outline" size="sm" class="w-full text-destructive hover:bg-destructive/10"><i class="bi bi-trash"></i> Eliminar</x-ui.button>
+                            </form>
                         </div>
-                    </div>
-                </div>
+                    </x-ui.card.content>
+                </x-ui.card>
             @endforeach
         </div>
     @else
-        <div class="text-center py-5">
-            <i class="bi bi-tags display-1 text-secondary"></i>
-            <h4 class="text-white mt-3">No hay géneros</h4>
-            <p class="text-secondary">Crea géneros para clasificar tus películas.</p>
-            <a href="{{ route('generos.create') }}" class="btn btn-warning mt-3">
-                <i class="bi bi-plus-lg"></i> Crear Género
-            </a>
+        <div class="animate-fade-up motion-reduce:animate-none py-16 text-center">
+            <i class="bi bi-tags text-6xl text-muted-foreground"></i>
+            <h4 class="mt-4 text-xl font-semibold text-foreground">No hay géneros</h4>
+            <p class="text-muted-foreground">Crea géneros para clasificar tus películas.</p>
+            <x-ui.button href="{{ route('generos.create') }}" class="mt-4 bg-warning text-warning-foreground hover:bg-warning/90"><i class="bi bi-plus-lg"></i> Crear Género</x-ui.button>
         </div>
     @endif
 </div>

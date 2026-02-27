@@ -2,121 +2,85 @@
 @section('title', 'Panel de administración - Pordede')
 @section('content')
 
-<div class="container py-4">
-    <h1 class="text-white fw-bold mb-4 border-start border-danger border-4 ps-3">
+<div class="container py-8">
+    <h1 class="mb-8 flex items-center gap-2 border-l-4 border-primary pl-3 text-3xl font-bold text-foreground">
         <i class="bi bi-speedometer2"></i> Panel de Administración
     </h1>
 
-    <!-- Stats Row -->
-    <div class="row g-4 mb-5">
-        <div class="col-md-3">
-            <div class="card bg-dark border-danger border-start border-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <p class="text-secondary small mb-1"><i class="bi bi-film"></i> Películas</p>
-                            <h2 class="text-white mb-0">{{ \App\Models\pelicula::count() }}</h2>
-                        </div>
-                        <i class="bi bi-film display-4 text-secondary opacity-50"></i>
-                    </div>
+    <div class="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <x-ui.card class="border-l-4 border-l-primary">
+            <x-ui.card.content class="flex items-center justify-between p-5">
+                <div>
+                    <p class="mb-1 text-sm text-muted-foreground"><i class="bi bi-film"></i> Películas</p>
+                    <p class="text-2xl font-bold text-foreground">{{ \App\Models\pelicula::count() }}</p>
                 </div>
-            </div>
-        </div>
+                <i class="bi bi-film text-4xl text-muted-foreground/40"></i>
+            </x-ui.card.content>
+        </x-ui.card>
 
-        <div class="col-md-3">
-            <div class="card bg-dark border-warning border-start border-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <p class="text-secondary small mb-1"><i class="bi bi-tags"></i> Géneros</p>
-                            <h2 class="text-white mb-0">{{ \App\Models\genero::count() }}</h2>
-                        </div>
-                        <i class="bi bi-tags display-4 text-secondary opacity-50"></i>
-                    </div>
+        <x-ui.card class="border-l-4 border-l-warning">
+            <x-ui.card.content class="flex items-center justify-between p-5">
+                <div>
+                    <p class="mb-1 text-sm text-muted-foreground"><i class="bi bi-tags"></i> Géneros</p>
+                    <p class="text-2xl font-bold text-foreground">{{ \App\Models\genero::count() }}</p>
                 </div>
-            </div>
-        </div>
+                <i class="bi bi-tags text-4xl text-muted-foreground/40"></i>
+            </x-ui.card.content>
+        </x-ui.card>
 
-        <div class="col-md-3">
-            <div class="card bg-dark border-info border-start border-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <p class="text-secondary small mb-1"><i class="bi bi-people"></i> Usuarios</p>
-                            <h2 class="text-white mb-0">{{ \App\Models\User::count() }}</h2>
-                        </div>
-                        <i class="bi bi-people display-4 text-secondary opacity-50"></i>
-                    </div>
+        <x-ui.card class="border-l-4 border-l-sky-500">
+            <x-ui.card.content class="flex items-center justify-between p-5">
+                <div>
+                    <p class="mb-1 text-sm text-muted-foreground"><i class="bi bi-people"></i> Usuarios</p>
+                    <p class="text-2xl font-bold text-foreground">{{ \App\Models\User::count() }}</p>
                 </div>
-            </div>
-        </div>
+                <i class="bi bi-people text-4xl text-muted-foreground/40"></i>
+            </x-ui.card.content>
+        </x-ui.card>
 
-        <div class="col-md-3">
-            <div class="card bg-dark border-success border-start border-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <p class="text-secondary small mb-1"><i class="bi bi-gift"></i> Promociones</p>
-                            <h2 class="text-white mb-0">{{ \App\Models\Promocion::count() }}</h2>
-                        </div>
-                        <i class="bi bi-gift display-4 text-secondary opacity-50"></i>
-                    </div>
+        <x-ui.card class="border-l-4 border-l-emerald-500">
+            <x-ui.card.content class="flex items-center justify-between p-5">
+                <div>
+                    <p class="mb-1 text-sm text-muted-foreground"><i class="bi bi-gift"></i> Promociones</p>
+                    <p class="text-2xl font-bold text-foreground">{{ \App\Models\Promocion::count() }}</p>
                 </div>
-            </div>
-        </div>
+                <i class="bi bi-gift text-4xl text-muted-foreground/40"></i>
+            </x-ui.card.content>
+        </x-ui.card>
     </div>
 
-    <!-- Admin Actions -->
-    <h2 class="text-white fw-bold mb-4 border-start border-warning border-4 ps-3">Gestión</h2>
+    <h2 class="mb-6 border-l-4 border-warning pl-3 text-2xl font-bold text-foreground">Gestión</h2>
 
-    <div class="row g-4 mb-5">
-        <!-- Movies Card -->
-        <div class="col-md-4">
-            <div class="card bg-dark border-secondary h-100 text-center">
-                <div class="card-body d-flex flex-column">
-                    <i class="bi bi-film display-3 text-danger mb-3"></i>
-                    <h4 class="text-white">Gestionar Películas</h4>
-                    <p class="text-secondary flex-grow-1">Crear, editar y eliminar películas de la cartelera</p>
-                    <a href="{{ route('peliculas.index') }}" class="btn btn-danger w-100">
-                        <i class="bi bi-arrow-right"></i> Ir a Películas
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="mb-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+        <x-ui.card hover class="text-center">
+            <x-ui.card.content class="flex flex-col items-center p-6">
+                <i class="bi bi-film mb-3 text-5xl text-primary"></i>
+                <h4 class="mb-1 text-lg font-semibold text-foreground">Gestionar Películas</h4>
+                <p class="mb-4 flex-1 text-sm text-muted-foreground">Crear, editar y eliminar películas de la cartelera</p>
+                <x-ui.button href="{{ route('peliculas.index') }}" class="w-full"><i class="bi bi-arrow-right"></i> Ir a Películas</x-ui.button>
+            </x-ui.card.content>
+        </x-ui.card>
 
-        <!-- Genres Card -->
-        <div class="col-md-4">
-            <div class="card bg-dark border-secondary h-100 text-center">
-                <div class="card-body d-flex flex-column">
-                    <i class="bi bi-tags display-3 text-warning mb-3"></i>
-                    <h4 class="text-white">Gestionar Géneros</h4>
-                    <p class="text-secondary flex-grow-1">Crear, editar y eliminar géneros de películas</p>
-                    <a href="{{ route('generos.index') }}" class="btn btn-warning w-100">
-                        <i class="bi bi-arrow-right"></i> Ir a Géneros
-                    </a>
-                </div>
-            </div>
-        </div>
+        <x-ui.card hover class="text-center">
+            <x-ui.card.content class="flex flex-col items-center p-6">
+                <i class="bi bi-tags mb-3 text-5xl text-warning"></i>
+                <h4 class="mb-1 text-lg font-semibold text-foreground">Gestionar Géneros</h4>
+                <p class="mb-4 flex-1 text-sm text-muted-foreground">Crear, editar y eliminar géneros de películas</p>
+                <x-ui.button href="{{ route('generos.index') }}" class="w-full bg-warning text-warning-foreground hover:bg-warning/90"><i class="bi bi-arrow-right"></i> Ir a Géneros</x-ui.button>
+            </x-ui.card.content>
+        </x-ui.card>
 
-        <!-- Promotions Card -->
-        <div class="col-md-4">
-            <div class="card bg-dark border-secondary h-100 text-center">
-                <div class="card-body d-flex flex-column">
-                    <i class="bi bi-gift display-3 text-success mb-3"></i>
-                    <h4 class="text-white">Gestionar Promociones</h4>
-                    <p class="text-secondary flex-grow-1">Crear y administrar promociones activas</p>
-                    <a href="{{ route('promociones.index') }}" class="btn btn-success w-100">
-                        <i class="bi bi-arrow-right"></i> Ir a Promociones
-                    </a>
-                </div>
-            </div>
-        </div>
+        <x-ui.card hover class="text-center">
+            <x-ui.card.content class="flex flex-col items-center p-6">
+                <i class="bi bi-gift mb-3 text-5xl text-emerald-500"></i>
+                <h4 class="mb-1 text-lg font-semibold text-foreground">Gestionar Promociones</h4>
+                <p class="mb-4 flex-1 text-sm text-muted-foreground">Crear y administrar promociones activas</p>
+                <x-ui.button href="{{ route('promociones.index') }}" class="w-full bg-emerald-600 text-white hover:bg-emerald-600/90"><i class="bi bi-arrow-right"></i> Ir a Promociones</x-ui.button>
+            </x-ui.card.content>
+        </x-ui.card>
     </div>
 
-    <!-- Back Button -->
-    <a href="{{ route('inicio') }}" class="btn btn-outline-light">
-        <i class="bi bi-arrow-left"></i> Volver al catálogo
-    </a>
+    <x-ui.button href="{{ route('inicio') }}" variant="outline"><i class="bi bi-arrow-left"></i> Volver al catálogo</x-ui.button>
 </div>
 
 @endsection
