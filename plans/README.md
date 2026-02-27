@@ -1,16 +1,19 @@
 # Animation improvement plans
 
 Written by `/improve-animations` against commit `02fb2e5`. All six audit
-findings were approved for planning. None have been executed yet.
+findings were approved for planning, then all six were executed in this
+same session (against commit `3127c3f`, the commit that added these plan
+files) and verified in a live browser — see the Execution notes section
+below.
 
 | # | Title | Severity | Status |
 | --- | --- | --- | --- |
-| [001](001-reduced-motion-on-toggles.md) | Add prefers-reduced-motion handling to dropdown, dialog, and mobile nav | HIGH | TODO |
-| [002](002-alert-dismiss-easing-and-reduced-motion.md) | Fix alert dismiss easing and its reduced-motion gap | MEDIUM | TODO |
-| [003](003-card-hover-transform-only.md) | Stop transitioning box-shadow on card hover | MEDIUM | TODO |
-| [004](004-fade-up-duration-budget.md) | Bring fade-up entrance animation under the 300ms UI budget | MEDIUM | TODO |
-| [005](005-admin-card-grid-stagger.md) | Add the catalog's stagger entrance to the admin card grids | Missed opportunity | TODO |
-| [006](006-movie-detail-entrance.md) | Add entrance motion to the movie detail page's stat row and info card | Missed opportunity | TODO |
+| [001](001-reduced-motion-on-toggles.md) | Add prefers-reduced-motion handling to dropdown, dialog, and mobile nav | HIGH | DONE |
+| [002](002-alert-dismiss-easing-and-reduced-motion.md) | Fix alert dismiss easing and its reduced-motion gap | MEDIUM | DONE |
+| [003](003-card-hover-transform-only.md) | Stop transitioning box-shadow on card hover | MEDIUM | DONE |
+| [004](004-fade-up-duration-budget.md) | Bring fade-up entrance animation under the 300ms UI budget | MEDIUM | DONE |
+| [005](005-admin-card-grid-stagger.md) | Add the catalog's stagger entrance to the admin card grids | Missed opportunity | DONE |
+| [006](006-movie-detail-entrance.md) | Add entrance motion to the movie detail page's stat row and info card | Missed opportunity | DONE |
 
 ## Recommended execution order
 
@@ -39,3 +42,30 @@ findings were approved for planning. None have been executed yet.
   — no hard dependency, just a soft recommendation to run 004 first (see
   above).
 - 003 and everything else are fully independent.
+
+## Execution notes
+
+All six were implemented directly (not via a separate isolated-worktree
+executor, given the plans were written moments earlier in the same
+session with full context already in hand) in the recommended order
+above, in one batch:
+
+- Verified mechanically: every touched Blade view still compiles, `npm
+  run build` succeeds, and the compiled CSS was spot-checked to confirm
+  `fade-up`'s duration is `.25s` (not the old `.5s`).
+- Verified live in a browser against a seeded database: the admin
+  dropdown still opens/closes correctly with the new dynamic
+  `x-transition` bindings from plan 001; `getComputedStyle` on a génRos
+  card confirmed `animationDuration: 0.25s` (plan 004) and
+  `transitionProperty: transform` with no `box-shadow` (plan 003); the
+  géneros grid renders 10 cards each with `animate-fade-up` and a
+  staggered `animation-delay` (plan 005); the movie detail page carries
+  `animate-fade-up` on its stat row (no delay) and its info card
+  (`animation-delay: .06s`) (plan 006).
+- Not independently re-verified live in this pass: plan 002's alert
+  dismiss (the edit is a precise match of the plan's target and reuses
+  the exact pattern already confirmed working in plan 001's components).
+- `prefers-reduced-motion` emulation itself was not toggled live in
+  DevTools during this verification pass — confidence there rests on
+  careful line-for-line application of each plan's Target block, not an
+  end-to-end reduced-motion browser test.

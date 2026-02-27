@@ -1,6 +1,6 @@
 # 006 — Add entrance motion to the movie detail page's stat row and info card
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 02fb2e5
 - **Severity**: Missed opportunity (additive, not corrective — lowest priority of the six plans)
 - **Category**: Missed opportunities

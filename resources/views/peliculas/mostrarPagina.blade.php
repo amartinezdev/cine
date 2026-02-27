@@ -49,7 +49,7 @@
                 @endauth
             </div>
 
-            <div class="mb-6 flex flex-wrap gap-3">
+            <div class="mb-6 flex flex-wrap gap-3 animate-fade-up motion-reduce:animate-none">
                 <div class="rounded-lg border border-border bg-card p-3 text-center">
                     <i class="bi bi-clock mb-1 block text-xl text-primary"></i>
                     <span class="font-bold text-foreground">{{ $pelicula->duracion }}</span>
@@ -112,7 +112,7 @@
         </div>
     </div>
 
-    <x-ui.card class="mb-12">
+    <x-ui.card class="mb-12 animate-fade-up motion-reduce:animate-none" style="animation-delay: .06s">
         <x-ui.card.header>
             <x-ui.card.title><i class="bi bi-info-circle text-primary"></i> Información Adicional</x-ui.card.title>
         </x-ui.card.header>
