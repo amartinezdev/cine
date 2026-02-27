@@ -2,72 +2,63 @@
 @section('title', 'Editar película - Pordede')
 @section('content')
 
-    <div class="container py-4">
-        <h1 class="text-white fw-bold mb-4 border-start border-danger border-4 ps-3">
-            <i class="bi bi-pencil"></i> Editar Película
-        </h1>
+<div class="container py-8">
+    <h1 class="mb-6 flex items-center gap-2 border-l-4 border-primary pl-3 text-2xl font-bold text-foreground">
+        <i class="bi bi-pencil"></i> Editar Película
+    </h1>
 
-        <div class="card bg-dark border-secondary">
-            <div class="card-body">
-                <form action="{{ route('peliculas.actualizar', $pelicula->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+    <x-ui.card class="max-w-2xl">
+        <x-ui.card.content class="p-6">
+            <form action="{{ route('peliculas.actualizar', $pelicula->id) }}" method="POST" enctype="multipart/form-data" onsubmit="pdPending(this)">
+                @csrf
+                @method('PUT')
 
-                    <div class="mb-3">
-                        <label for="titulo" class="form-label">Título</label>
-                        <input type="text" id="titulo" name="titulo" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo', $pelicula->titulo) }}" required>
-                        @error('titulo')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                <div class="mb-5">
+                    <x-ui.label for="titulo">Título</x-ui.label>
+                    <x-ui.input type="text" name="titulo" value="{{ old('titulo', $pelicula->titulo) }}" required class="mt-1.5" />
+                </div>
+
+                <div class="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-[2fr_1fr]">
+                    <div>
+                        <x-ui.label for="genero_id">Género</x-ui.label>
+                        <x-ui.select name="genero_id" required class="mt-1.5">
+                            @foreach($generos as $genero)
+                                <option value="{{ $genero->id }}" @selected(old('genero_id', $pelicula->genero_id) == $genero->id)>{{ $genero->nombre }}</option>
+                            @endforeach
+                        </x-ui.select>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-8 mb-3">
-                            <label for="genero_id" class="form-label">Género</label>
-                            <select id="genero_id" name="genero_id" class="form-select @error('genero_id') is-invalid @enderror" required>
-                                @foreach($generos as $genero)
-                                    <option value="{{ $genero->id }}" @selected(old('genero_id', $pelicula->genero_id) == $genero->id)>{{ $genero->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @error('genero_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="duracion" class="form-label">Duración (minutos)</label>
-                            <input type="number" id="duracion" name="duracion" class="form-control @error('duracion') is-invalid @enderror" value="{{ old('duracion', $pelicula->duracion) }}" required>
-                            @error('duracion')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                        </div>
+                    <div>
+                        <x-ui.label for="duracion">Duración (min)</x-ui.label>
+                        <x-ui.input type="number" name="duracion" value="{{ old('duracion', $pelicula->duracion) }}" required class="mt-1.5" />
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="precio_entrada" class="form-label">Precio Entrada (€)</label>
-                        <input type="number" step="0.01" id="precio_entrada" name="precio_entrada" class="form-control @error('precio_entrada') is-invalid @enderror" value="{{ old('precio_entrada', $pelicula->precio_entrada) }}" required>
-                        @error('precio_entrada')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
+                <div class="mb-5">
+                    <x-ui.label for="precio_entrada">Precio Entrada (€)</x-ui.label>
+                    <x-ui.input type="number" step="0.01" name="precio_entrada" value="{{ old('precio_entrada', $pelicula->precio_entrada) }}" required class="mt-1.5" />
+                </div>
 
-                    <div class="mb-3">
-                        <label for="sipnosis" class="form-label">Sinopsis</label>
-                        <textarea id="sipnosis" name="sipnosis" class="form-control @error('sipnosis') is-invalid @enderror" rows="5" required>{{ old('sipnosis', $pelicula->sipnosis) }}</textarea>
-                        @error('sipnosis')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
+                <div class="mb-5">
+                    <x-ui.label for="sipnosis">Sinopsis</x-ui.label>
+                    <x-ui.textarea name="sipnosis" rows="5" required class="mt-1.5">{{ old('sipnosis', $pelicula->sipnosis) }}</x-ui.textarea>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="poster" class="form-label">Póster (Imagen)</label>
-                        @if($pelicula->getFirstMediaUrl('poster'))
-                            <div class="mb-2">
-                                <img src="{{ $pelicula->getFirstMediaUrl('poster') }}" alt="Póster actual de {{ $pelicula->titulo }}" class="rounded border border-secondary" style="max-width: 150px;">
-                            </div>
-                        @endif
-                        <input type="file" id="poster" name="poster" class="form-control @error('poster') is-invalid @enderror" accept="image/*">
-                        <div class="form-text">JPEG, PNG, JPG o GIF, hasta 1&nbsp;MB. Déjalo vacío para conservar el póster actual.</div>
-                        @error('poster')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
+                <div class="mb-6">
+                    <x-ui.label for="poster">Póster (Imagen)</x-ui.label>
+                    @if($pelicula->getFirstMediaUrl('poster'))
+                        <img src="{{ $pelicula->getFirstMediaUrl('poster') }}" alt="Póster actual de {{ $pelicula->titulo }}" class="mb-2 mt-1.5 max-w-[150px] rounded-md border border-border">
+                    @endif
+                    <x-ui.input type="file" name="poster" accept="image/*" class="mt-1.5 file:mr-3 file:rounded-md file:border-0 file:bg-secondary file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-secondary-foreground" />
+                    <p class="mt-1.5 text-sm text-muted-foreground">JPEG, PNG, JPG o GIF, hasta 1&nbsp;MB. Déjalo vacío para conservar el póster actual.</p>
+                </div>
 
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-danger"><i class="bi bi-check-lg"></i> Actualizar Película</button>
-                        <a href="{{ route('peliculas.index') }}" class="btn btn-outline-light"><i class="bi bi-arrow-left"></i> Cancelar</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+                <div class="flex gap-2">
+                    <x-ui.button type="submit"><i class="bi bi-check-lg"></i> Actualizar Película</x-ui.button>
+                    <x-ui.button href="{{ route('peliculas.index') }}" variant="outline"><i class="bi bi-arrow-left"></i> Cancelar</x-ui.button>
+                </div>
+            </form>
+        </x-ui.card.content>
+    </x-ui.card>
+</div>
 
 @endsection

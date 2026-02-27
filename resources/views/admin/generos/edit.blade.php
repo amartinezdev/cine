@@ -2,32 +2,29 @@
 @section('title', 'Editar género - Pordede')
 @section('content')
 
-    <div class="container py-4">
-        <h1 class="text-white fw-bold mb-4 border-start border-warning border-4 ps-3">
-            <i class="bi bi-pencil"></i> Editar Género
-        </h1>
+<div class="container py-8">
+    <h1 class="mb-6 flex items-center gap-2 border-l-4 border-warning pl-3 text-2xl font-bold text-foreground">
+        <i class="bi bi-pencil"></i> Editar Género
+    </h1>
 
-        <div class="card bg-dark border-secondary">
-            <div class="card-body">
-                <form action="{{ route('generos.actualizar', $genero->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
+    <x-ui.card class="max-w-xl">
+        <x-ui.card.content class="p-6">
+            <form action="{{ route('generos.actualizar', $genero->id) }}" method="POST" onsubmit="pdPending(this)">
+                @csrf
+                @method('PUT')
 
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre del Género</label>
-                        <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ old('nombre', $genero->nombre) }}" required>
-                        @error('nombre')
-                            <div class="invalid-feedback">El nombre ya está en uso.</div>
-                        @enderror
-                    </div>
+                <div class="mb-5">
+                    <x-ui.label for="nombre">Nombre del Género</x-ui.label>
+                    <x-ui.input type="text" name="nombre" value="{{ old('nombre', $genero->nombre) }}" required class="mt-1.5" />
+                </div>
 
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-warning"><i class="bi bi-check-lg"></i> Actualizar Género</button>
-                        <a href="{{ route('generos.index') }}" class="btn btn-outline-light"><i class="bi bi-arrow-left"></i> Cancelar</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+                <div class="flex gap-2">
+                    <x-ui.button type="submit" class="bg-warning text-warning-foreground hover:bg-warning/90"><i class="bi bi-check-lg"></i> Actualizar Género</x-ui.button>
+                    <x-ui.button href="{{ route('generos.index') }}" variant="outline"><i class="bi bi-arrow-left"></i> Cancelar</x-ui.button>
+                </div>
+            </form>
+        </x-ui.card.content>
+    </x-ui.card>
+</div>
 
 @endsection
