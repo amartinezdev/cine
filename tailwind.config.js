@@ -74,7 +74,7 @@ module.exports = {
                 },
             },
             animation: {
-                'fade-up': 'fade-up .5s cubic-bezier(0.23, 1, 0.32, 1) both',
+                'fade-up': 'fade-up .25s cubic-bezier(0.23, 1, 0.32, 1) both',
                 shake: 'shake .4s cubic-bezier(.36,.07,.19,.97) both',
             },
             transitionTimingFunction: {

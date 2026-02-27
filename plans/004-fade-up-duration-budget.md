@@ -1,6 +1,6 @@
 # 004 — Bring fade-up entrance animation under the 300ms UI budget
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 02fb2e5
 - **Severity**: MEDIUM
 - **Category**: Easing & duration
