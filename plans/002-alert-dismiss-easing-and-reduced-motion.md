@@ -1,6 +1,6 @@
 # 002 — Fix alert dismiss easing and its reduced-motion gap
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 02fb2e5
 - **Severity**: MEDIUM
 - **Category**: Easing (+ closes one Accessibility gap missed in the original audit)

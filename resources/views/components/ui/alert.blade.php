@@ -10,7 +10,7 @@
 @endphp
 
 <div
-    @if($dismissible) x-data="{ show: true }" x-show="show" x-transition:leave="transition-[opacity,transform] duration-150 ease-in-out" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 -translate-y-1" @endif
+    @if($dismissible) x-data="{ show: true, reduceMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches }" x-show="show" :x-transition:leave="reduceMotion ? 'transition-opacity duration-150 ease-out' : 'transition-[opacity,transform] duration-150 ease-out'" x-transition:leave-start="opacity-100" :x-transition:leave-end="reduceMotion ? 'opacity-0' : 'opacity-0 -translate-y-1'" @endif
     {{ $attributes->merge(['class' => 'relative flex items-start gap-3 rounded-lg border p-4 text-sm animate-fade-up motion-reduce:animate-none ' . ($variants[$variant] ?? $variants['default'])]) }}
 >
     {{ $slot }}
