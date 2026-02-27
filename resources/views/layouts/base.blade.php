@@ -18,7 +18,7 @@
     <x-demo-disclaimer />
 
     {{-- Navbar --}}
-    <nav x-data="{ mobileOpen: false }" class="relative z-40 border-b border-border bg-card/60 backdrop-blur">
+    <nav x-data="{ mobileOpen: false }" class="sticky top-0 z-40 border-b border-border/60 bg-card/60 backdrop-blur-md [@media(prefers-reduced-transparency:reduce)]:bg-card [@media(prefers-reduced-transparency:reduce)]:backdrop-blur-none">
         <div class="container flex h-16 items-center justify-between">
             <a href="{{ route('inicio') }}" class="flex items-center gap-2 text-lg font-extrabold tracking-wide text-primary">
                 <i class="bi bi-film"></i> PORDEDE

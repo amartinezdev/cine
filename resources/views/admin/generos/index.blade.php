@@ -4,7 +4,7 @@
 
 <div class="container py-8">
     <div class="mb-6 flex items-center justify-between">
-        <h1 class="border-l-4 border-warning pl-3 text-2xl font-bold text-foreground">Gestionar Géneros</h1>
+        <h1 class="border-l-4 border-warning pl-3 text-2xl font-bold tracking-tight text-foreground">Gestionar Géneros</h1>
         <x-ui.button href="{{ route('generos.create') }}" class="bg-warning text-warning-foreground hover:bg-warning/90"><i class="bi bi-plus-lg"></i> Añadir Género</x-ui.button>
     </div>
 

@@ -4,7 +4,7 @@
 
 <div class="container py-8">
     <div class="mb-6 flex items-center justify-between">
-        <h1 class="border-l-4 border-primary pl-3 text-2xl font-bold text-foreground">Gestionar Promociones</h1>
+        <h1 class="border-l-4 border-primary pl-3 text-2xl font-bold tracking-tight text-foreground">Gestionar Promociones</h1>
         <x-ui.button href="{{ route('promociones.create') }}"><i class="bi bi-plus-lg"></i> Añadir Promoción</x-ui.button>
     </div>
 

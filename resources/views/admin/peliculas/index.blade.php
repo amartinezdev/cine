@@ -4,7 +4,7 @@
 
 <div class="container py-8">
     <div class="mb-6 flex items-center justify-between">
-        <h1 class="flex items-center gap-2 border-l-4 border-primary pl-3 text-2xl font-bold text-foreground">Gestionar Películas</h1>
+        <h1 class="flex items-center gap-2 border-l-4 border-primary pl-3 text-2xl font-bold tracking-tight text-foreground">Gestionar Películas</h1>
         <x-ui.button href="{{ route('peliculas.create') }}"><i class="bi bi-plus-lg"></i> Añadir Película</x-ui.button>
     </div>
 

@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container py-8">
-    <h1 class="mb-6 border-l-4 border-primary pl-3 text-3xl font-bold text-foreground">Catálogo de Películas</h1>
+    <h1 class="mb-6 border-l-4 border-primary pl-3 text-3xl font-bold tracking-tight text-foreground">Catálogo de Películas</h1>
 
     <form method="GET" action="{{ route('inicio') }}" class="mb-10 grid grid-cols-1 gap-3 lg:grid-cols-12">
         <div class="relative lg:col-span-5">
@@ -32,7 +32,7 @@
 
         @foreach($peliculasPorGenero as $generoNombre => $peliculasPorGeneroActual)
             <section class="mb-12">
-                <h2 class="mb-5 border-l-4 border-warning pl-3 text-2xl font-bold text-foreground">{{ $generoNombre }}</h2>
+                <h2 class="mb-5 border-l-4 border-warning pl-3 text-2xl font-bold tracking-tight text-foreground">{{ $generoNombre }}</h2>
 
                 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                     @foreach($peliculasPorGeneroActual as $pelicula)

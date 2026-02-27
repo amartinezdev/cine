@@ -39,7 +39,7 @@
         <div class="md:col-span-8">
             <div class="mb-4 flex items-start justify-between gap-4">
                 <div>
-                    <h1 class="mb-2 text-3xl font-bold text-foreground">{{ $pelicula->titulo }}</h1>
+                    <h1 class="mb-2 text-3xl font-bold tracking-tight text-foreground">{{ $pelicula->titulo }}</h1>
                     <x-ui.badge variant="warning"><i class="bi bi-tags"></i> {{ $pelicula->genero->nombre }}</x-ui.badge>
                 </div>
                 @auth

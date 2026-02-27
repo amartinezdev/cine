@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container py-8">
-    <h1 class="mb-6 flex items-center gap-2 border-l-4 border-primary pl-3 text-2xl font-bold text-foreground">
+    <h1 class="mb-6 flex items-center gap-2 border-l-4 border-primary pl-3 text-2xl font-bold tracking-tight text-foreground">
         <i class="bi bi-pencil"></i> Editar Película
     </h1>
 

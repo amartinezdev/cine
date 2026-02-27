@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container py-8">
-    <h1 class="mb-8 flex items-center gap-2 border-l-4 border-primary pl-3 text-3xl font-bold text-foreground">
+    <h1 class="mb-8 flex items-center gap-2 border-l-4 border-primary pl-3 text-3xl font-bold tracking-tight text-foreground">
         <i class="bi bi-speedometer2"></i> Panel de Administración
     </h1>
 
@@ -12,7 +12,7 @@
             <x-ui.card.content class="flex items-center justify-between p-5">
                 <div>
                     <p class="mb-1 text-sm text-muted-foreground"><i class="bi bi-film"></i> Películas</p>
-                    <p class="text-2xl font-bold text-foreground">{{ \App\Models\pelicula::count() }}</p>
+                    <p class="text-2xl font-bold tracking-tight text-foreground">{{ \App\Models\pelicula::count() }}</p>
                 </div>
                 <i class="bi bi-film text-4xl text-muted-foreground/40"></i>
             </x-ui.card.content>
@@ -22,7 +22,7 @@
             <x-ui.card.content class="flex items-center justify-between p-5">
                 <div>
                     <p class="mb-1 text-sm text-muted-foreground"><i class="bi bi-tags"></i> Géneros</p>
-                    <p class="text-2xl font-bold text-foreground">{{ \App\Models\genero::count() }}</p>
+                    <p class="text-2xl font-bold tracking-tight text-foreground">{{ \App\Models\genero::count() }}</p>
                 </div>
                 <i class="bi bi-tags text-4xl text-muted-foreground/40"></i>
             </x-ui.card.content>
@@ -32,7 +32,7 @@
             <x-ui.card.content class="flex items-center justify-between p-5">
                 <div>
                     <p class="mb-1 text-sm text-muted-foreground"><i class="bi bi-people"></i> Usuarios</p>
-                    <p class="text-2xl font-bold text-foreground">{{ \App\Models\User::count() }}</p>
+                    <p class="text-2xl font-bold tracking-tight text-foreground">{{ \App\Models\User::count() }}</p>
                 </div>
                 <i class="bi bi-people text-4xl text-muted-foreground/40"></i>
             </x-ui.card.content>
@@ -42,14 +42,14 @@
             <x-ui.card.content class="flex items-center justify-between p-5">
                 <div>
                     <p class="mb-1 text-sm text-muted-foreground"><i class="bi bi-gift"></i> Promociones</p>
-                    <p class="text-2xl font-bold text-foreground">{{ \App\Models\Promocion::count() }}</p>
+                    <p class="text-2xl font-bold tracking-tight text-foreground">{{ \App\Models\Promocion::count() }}</p>
                 </div>
                 <i class="bi bi-gift text-4xl text-muted-foreground/40"></i>
             </x-ui.card.content>
         </x-ui.card>
     </div>
 
-    <h2 class="mb-6 border-l-4 border-warning pl-3 text-2xl font-bold text-foreground">Gestión</h2>
+    <h2 class="mb-6 border-l-4 border-warning pl-3 text-2xl font-bold tracking-tight text-foreground">Gestión</h2>
 
     <div class="mb-8 grid grid-cols-1 gap-5 md:grid-cols-3">
         <x-ui.card hover class="text-center">
