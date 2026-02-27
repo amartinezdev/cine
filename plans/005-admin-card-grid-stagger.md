@@ -1,6 +1,6 @@
 # 005 — Add the catalog's stagger entrance to the admin card grids
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 02fb2e5
 - **Severity**: Missed opportunity (additive, not corrective)
 - **Category**: Cohesion & tokens / Missed opportunities

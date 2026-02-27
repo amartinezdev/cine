@@ -15,7 +15,10 @@
     @if($promociones->count() > 0)
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($promociones as $promocion)
-                <x-ui.card hover>
+                <x-ui.card hover
+                    class="animate-fade-up motion-reduce:animate-none"
+                    style="animation-delay: {{ min($loop->index, 8) * 0.06 }}s"
+                >
                     <x-ui.card.content class="p-5">
                         <h5 class="mb-2 text-lg font-semibold text-foreground">{{ $promocion->titulo }}</h5>
                         <p class="mb-4 text-sm text-muted-foreground">{{ Str::limit($promocion->mensaje, 100) }}</p>

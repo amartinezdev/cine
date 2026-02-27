@@ -19,7 +19,10 @@
     @if($generos->count() > 0)
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($generos as $genero)
-                <x-ui.card hover class="border-l-4 border-l-warning">
+                <x-ui.card hover
+                    class="border-l-4 border-l-warning animate-fade-up motion-reduce:animate-none"
+                    style="animation-delay: {{ min($loop->index, 8) * 0.06 }}s"
+                >
                     <x-ui.card.content class="p-5">
                         <h5 class="mb-1 text-lg font-semibold text-foreground"><i class="bi bi-tags text-warning"></i> {{ $genero->nombre }}</h5>
                         <p class="mb-4 text-sm text-muted-foreground"><i class="bi bi-film"></i> {{ $genero->peliculas->count() }} películas</p>
