@@ -2,72 +2,58 @@
 @section('title', 'Crear cuenta - Pordede')
 @section('content')
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card bg-dark border-secondary shadow-lg">
-                <div class="card-header border-secondary">
-                    <h3 class="mb-0 text-white"><i class="bi bi-person-plus text-danger"></i> Crear Cuenta</h3>
+<div class="container flex justify-center py-12">
+    <x-ui.card class="w-full max-w-md">
+        <x-ui.card.header class="border-b border-border">
+            <x-ui.card.title><i class="bi bi-person-plus text-primary"></i> Crear Cuenta</x-ui.card.title>
+        </x-ui.card.header>
+
+        <x-ui.card.content class="pt-6">
+            @if($errors->any())
+                <x-ui.alert variant="destructive" class="mb-5">
+                    <i class="bi bi-exclamation-triangle mt-0.5"></i>
+                    <div>
+                        @foreach($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                </x-ui.alert>
+            @endif
+
+            <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                @csrf
+
+                <div>
+                    <x-ui.label for="name">Nombre Completo</x-ui.label>
+                    <x-ui.input type="text" name="name" value="{{ old('name') }}" required autofocus class="mt-1.5" />
                 </div>
-                <div class="card-body p-4 text-white">
-                    @if($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            @foreach($errors->all() as $error)
-                                <div>{{ $error }}</div>
-                            @endforeach
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
 
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nombre Completo</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autofocus>
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
-                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required>
-                            @error('password_confirmation')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a class="text-decoration-none" href="{{ route('login') }}">
-                                ¿Ya tienes cuenta?
-                            </a>
-                            <button type="submit" class="btn btn-danger"><i class="bi bi-person-plus"></i> Registrarse</button>
-                        </div>
-                    </form>
+                <div>
+                    <x-ui.label for="email">Correo Electrónico</x-ui.label>
+                    <x-ui.input type="email" name="email" value="{{ old('email') }}" required class="mt-1.5" />
                 </div>
-                <div class="card-footer border-secondary text-center text-secondary">
-                    Al registrarte, aceptas nuestros términos de servicio
+
+                <div>
+                    <x-ui.label for="password">Contraseña</x-ui.label>
+                    <x-ui.input type="password" name="password" required class="mt-1.5" />
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <div>
+                    <x-ui.label for="password_confirmation">Confirmar Contraseña</x-ui.label>
+                    <x-ui.input type="password" name="password_confirmation" required class="mt-1.5" />
+                </div>
+
+                <div class="flex items-center justify-between pt-2">
+                    <a href="{{ route('login') }}" class="text-sm text-primary hover:underline">¿Ya tienes cuenta?</a>
+                    <x-ui.button type="submit"><i class="bi bi-person-plus"></i> Registrarse</x-ui.button>
+                </div>
+            </form>
+        </x-ui.card.content>
+
+        <x-ui.card.footer class="justify-center border-t border-border text-sm text-muted-foreground">
+            Al registrarte, aceptas nuestros términos de servicio
+        </x-ui.card.footer>
+    </x-ui.card>
 </div>
 
 @endsection
