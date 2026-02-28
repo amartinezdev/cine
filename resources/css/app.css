@@ -65,4 +65,13 @@
     [x-cloak] {
         display: none !important;
     }
+
+    /* Bootstrap Icons glyphs carry no built-in trailing space, so every
+       `<i class="bi ...">` immediately followed by text renders glued to
+       it. This repo's convention is always `<i class="bi ..."></i> Texto`
+       (icon first), so a right margin on every icon is the correct fix
+       sitewide rather than patching each occurrence individually. */
+    .bi {
+        margin-right: 0.4em;
+    }
 }

@@ -54,7 +54,7 @@
         </x-ui.card>
     @else
         <div class="animate-fade-up motion-reduce:animate-none py-16 text-center">
-            <i class="bi bi-film text-6xl text-muted-foreground"></i>
+            <i class="bi bi-film text-6xl text-muted-foreground mr-0"></i>
             <h4 class="mt-4 text-xl font-semibold text-foreground">No hay películas</h4>
             <p class="text-muted-foreground">Agrega películas a tu catálogo de cine.</p>
             <x-ui.button href="{{ route('peliculas.create') }}" class="mt-4"><i class="bi bi-plus-lg"></i> Crear Película</x-ui.button>

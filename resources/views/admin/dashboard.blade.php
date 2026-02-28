@@ -54,7 +54,7 @@
     <div class="mb-8 grid grid-cols-1 gap-5 md:grid-cols-3">
         <x-ui.card hover class="text-center">
             <x-ui.card.content class="flex flex-col items-center p-6">
-                <i class="bi bi-film mb-3 text-5xl text-primary"></i>
+                <i class="bi bi-film mb-3 text-5xl text-primary mr-0"></i>
                 <h4 class="mb-1 text-lg font-semibold text-foreground">Gestionar Películas</h4>
                 <p class="mb-4 flex-1 text-sm text-muted-foreground">Crear, editar y eliminar películas de la cartelera</p>
                 <x-ui.button href="{{ route('peliculas.index') }}" class="w-full"><i class="bi bi-arrow-right"></i> Ir a Películas</x-ui.button>
@@ -63,7 +63,7 @@
 
         <x-ui.card hover class="text-center">
             <x-ui.card.content class="flex flex-col items-center p-6">
-                <i class="bi bi-tags mb-3 text-5xl text-warning"></i>
+                <i class="bi bi-tags mb-3 text-5xl text-warning mr-0"></i>
                 <h4 class="mb-1 text-lg font-semibold text-foreground">Gestionar Géneros</h4>
                 <p class="mb-4 flex-1 text-sm text-muted-foreground">Crear, editar y eliminar géneros de películas</p>
                 <x-ui.button href="{{ route('generos.index') }}" class="w-full bg-warning text-warning-foreground hover:bg-warning/90"><i class="bi bi-arrow-right"></i> Ir a Géneros</x-ui.button>
@@ -72,7 +72,7 @@
 
         <x-ui.card hover class="text-center">
             <x-ui.card.content class="flex flex-col items-center p-6">
-                <i class="bi bi-gift mb-3 text-5xl text-emerald-500"></i>
+                <i class="bi bi-gift mb-3 text-5xl text-emerald-500 mr-0"></i>
                 <h4 class="mb-1 text-lg font-semibold text-foreground">Gestionar Promociones</h4>
                 <p class="mb-4 flex-1 text-sm text-muted-foreground">Crear y administrar promociones activas</p>
                 <x-ui.button href="{{ route('promociones.index') }}" class="w-full bg-emerald-600 text-white hover:bg-emerald-600/90"><i class="bi bi-arrow-right"></i> Ir a Promociones</x-ui.button>

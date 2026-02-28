@@ -60,7 +60,7 @@
         </div>
     @else
         <div class="animate-fade-up motion-reduce:animate-none py-16 text-center">
-            <i class="bi bi-gift text-6xl text-muted-foreground"></i>
+            <i class="bi bi-gift text-6xl text-muted-foreground mr-0"></i>
             <h4 class="mt-4 text-xl font-semibold text-foreground">No hay promociones</h4>
             <p class="text-muted-foreground">Crea una nueva promoción para comenzar.</p>
             <x-ui.button href="{{ route('promociones.create') }}" class="mt-4"><i class="bi bi-plus-lg"></i> Crear Promoción</x-ui.button>

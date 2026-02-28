@@ -40,7 +40,7 @@
         </div>
     @else
         <div class="animate-fade-up motion-reduce:animate-none py-16 text-center">
-            <i class="bi bi-tags text-6xl text-muted-foreground"></i>
+            <i class="bi bi-tags text-6xl text-muted-foreground mr-0"></i>
             <h4 class="mt-4 text-xl font-semibold text-foreground">No hay géneros</h4>
             <p class="text-muted-foreground">Crea géneros para clasificar tus películas.</p>
             <x-ui.button href="{{ route('generos.create') }}" class="mt-4 bg-warning text-warning-foreground hover:bg-warning/90"><i class="bi bi-plus-lg"></i> Crear Género</x-ui.button>

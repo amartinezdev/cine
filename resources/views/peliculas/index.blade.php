@@ -50,7 +50,7 @@
                                     >
                                 @else
                                     <div class="flex h-[350px] w-full items-center justify-center bg-secondary">
-                                        <i class="bi bi-image text-6xl text-muted-foreground"></i>
+                                        <i class="bi bi-image text-6xl text-muted-foreground mr-0"></i>
                                     </div>
                                 @endif
                             </a>
@@ -80,7 +80,7 @@
                                         </x-slot:trigger>
 
                                         <div class="p-6 text-center">
-                                            <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning"></i>
+                                            <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning mr-0"></i>
                                             <p class="mb-2 text-lg font-semibold text-foreground">Esta funcionalidad está en desarrollo</p>
                                             <p class="text-sm text-muted-foreground">Estamos trabajando para ofrecerte esta característica muy pronto. ¡Gracias por tu paciencia!</p>
                                             <x-ui.button @click="open = false" class="mt-4">Entendido</x-ui.button>
@@ -108,7 +108,7 @@
         @endforeach
     @else
         <div class="animate-fade-up motion-reduce:animate-none py-16 text-center">
-            <i class="bi bi-search text-6xl text-muted-foreground"></i>
+            <i class="bi bi-search text-6xl text-muted-foreground mr-0"></i>
             <h4 class="mt-4 text-xl font-semibold text-foreground">No hay películas disponibles</h4>
             <p class="text-muted-foreground">Intenta con otros términos de búsqueda o filtra por género diferente.</p>
             <x-ui.button href="{{ route('inicio') }}" class="mt-4"><i class="bi bi-arrow-counterclockwise"></i> Limpiar filtros</x-ui.button>

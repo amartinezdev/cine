@@ -30,7 +30,7 @@
                     <img src="{{ $posterUrl }}" alt="{{ $pelicula->titulo }}" class="w-full opacity-0 transition-opacity duration-200 ease-out" onload="this.classList.remove('opacity-0')">
                 @else
                     <div class="flex h-[500px] items-center justify-center bg-secondary">
-                        <i class="bi bi-image text-6xl text-muted-foreground"></i>
+                        <i class="bi bi-image text-6xl text-muted-foreground mr-0"></i>
                     </div>
                 @endif
             </x-ui.card>
@@ -78,7 +78,7 @@
                         <x-ui.button size="lg" type="button"><i class="bi bi-ticket-perforated"></i> Comprar Entrada</x-ui.button>
                     </x-slot:trigger>
                     <div class="p-6 text-center">
-                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning"></i>
+                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning mr-0"></i>
                         <p class="mb-2 text-lg font-semibold text-foreground">Esta funcionalidad está en desarrollo</p>
                         <p class="text-sm text-muted-foreground">Estamos trabajando para ofrecerte esta característica muy pronto. ¡Gracias por tu paciencia!</p>
                         <x-ui.button @click="open = false" class="mt-4">Entendido</x-ui.button>
@@ -90,7 +90,7 @@
                         <x-ui.button size="lg" variant="outline" type="button"><i class="bi bi-heart"></i> Añadir a Favoritos</x-ui.button>
                     </x-slot:trigger>
                     <div class="p-6 text-center">
-                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning"></i>
+                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning mr-0"></i>
                         <p class="mb-2 text-lg font-semibold text-foreground">Esta funcionalidad está en desarrollo</p>
                         <p class="text-sm text-muted-foreground">Estamos trabajando para ofrecerte esta característica muy pronto. ¡Gracias por tu paciencia!</p>
                         <x-ui.button @click="open = false" class="mt-4">Entendido</x-ui.button>
@@ -102,7 +102,7 @@
                         <x-ui.button size="lg" variant="outline" type="button"><i class="bi bi-share"></i> Compartir</x-ui.button>
                     </x-slot:trigger>
                     <div class="p-6 text-center">
-                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning"></i>
+                        <i class="bi bi-gear-wide-connected mb-3 block text-5xl text-warning mr-0"></i>
                         <p class="mb-2 text-lg font-semibold text-foreground">Esta funcionalidad está en desarrollo</p>
                         <p class="text-sm text-muted-foreground">Estamos trabajando para ofrecerte esta característica muy pronto. ¡Gracias por tu paciencia!</p>
                         <x-ui.button @click="open = false" class="mt-4">Entendido</x-ui.button>
