@@ -1,4 +1,6 @@
-<div x-data="{ open: false, reduceMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches }" x-on:keydown.escape.window="open = false" {{ $attributes }}>
+@props(['autoOpen' => false])
+
+<div x-data="{ open: {{ $autoOpen ? 'true' : 'false' }}, reduceMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches }" x-on:keydown.escape.window="open = false" {{ $attributes }}>
     <span class="contents" @click="open = true">{{ $trigger }}</span>
 
     <template x-teleport="body">

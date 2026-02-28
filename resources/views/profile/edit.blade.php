@@ -1,29 +1,31 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.base')
+@section('title', 'Mi perfil - Pordede')
+@section('content')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+<div class="container max-w-2xl py-8">
+    <h1 class="mb-8 border-l-4 border-primary pl-3 text-3xl font-bold tracking-tight text-foreground">
+        <i class="bi bi-person-circle"></i> Mi Perfil
+    </h1>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+    <div class="space-y-6">
+        <x-ui.card>
+            <x-ui.card.content class="p-6">
+                @include('profile.partials.update-profile-information-form')
+            </x-ui.card.content>
+        </x-ui.card>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
+        <x-ui.card>
+            <x-ui.card.content class="p-6">
+                @include('profile.partials.update-password-form')
+            </x-ui.card.content>
+        </x-ui.card>
+
+        <x-ui.card>
+            <x-ui.card.content class="p-6">
+                @include('profile.partials.delete-user-form')
+            </x-ui.card.content>
+        </x-ui.card>
     </div>
-</x-app-layout>
+</div>
+
+@endsection
