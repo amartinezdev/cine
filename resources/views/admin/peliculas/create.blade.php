@@ -7,7 +7,7 @@
         <i class="bi bi-film"></i> Crear Película
     </h1>
 
-    <x-ui.card class="max-w-2xl">
+    <x-ui.card class="max-w-2xl mx-auto">
         <x-ui.card.content class="p-6">
             <form action="{{ route('peliculas.crear') }}" method="POST" enctype="multipart/form-data" onsubmit="pdPending(this)">
                 @csrf
@@ -45,7 +45,7 @@
 
                 <div class="mb-6">
                     <x-ui.label for="poster">Póster (Imagen)</x-ui.label>
-                    <x-ui.input type="file" name="poster" accept="image/*" class="mt-1.5 file:mr-3 file:rounded-md file:border-0 file:bg-secondary file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-secondary-foreground" />
+                    <x-ui.input type="file" name="poster" accept="image/*" class="mt-1.5" />
                     <p class="mt-1.5 text-sm text-muted-foreground">JPEG, PNG, JPG o GIF, hasta 1&nbsp;MB.</p>
                 </div>
 

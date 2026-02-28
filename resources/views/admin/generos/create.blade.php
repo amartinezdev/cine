@@ -7,7 +7,7 @@
         <i class="bi bi-tags"></i> Crear Género
     </h1>
 
-    <x-ui.card class="max-w-xl">
+    <x-ui.card class="max-w-xl mx-auto">
         <x-ui.card.content class="p-6">
             <form action="{{ route('generos.crear') }}" method="POST" onsubmit="pdPending(this)">
                 @csrf

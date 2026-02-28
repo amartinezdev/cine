@@ -7,7 +7,7 @@
         <i class="bi bi-gift"></i> Crear Promoción
     </h1>
 
-    <x-ui.card class="max-w-2xl">
+    <x-ui.card class="max-w-2xl mx-auto">
         <x-ui.card.content class="p-6">
             <form action="{{ route('promociones.crear') }}" method="POST" onsubmit="pdPending(this)">
                 @csrf

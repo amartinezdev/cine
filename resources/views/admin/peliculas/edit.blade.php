@@ -7,7 +7,7 @@
         <i class="bi bi-pencil"></i> Editar Película
     </h1>
 
-    <x-ui.card class="max-w-2xl">
+    <x-ui.card class="max-w-2xl mx-auto">
         <x-ui.card.content class="p-6">
             <form action="{{ route('peliculas.actualizar', $pelicula->id) }}" method="POST" enctype="multipart/form-data" onsubmit="pdPending(this)">
                 @csrf
@@ -48,7 +48,7 @@
                     @if($pelicula->getFirstMediaUrl('poster'))
                         <img src="{{ $pelicula->getFirstMediaUrl('poster') }}" alt="Póster actual de {{ $pelicula->titulo }}" class="mb-2 mt-1.5 max-w-[150px] rounded-md border border-border">
                     @endif
-                    <x-ui.input type="file" name="poster" accept="image/*" class="mt-1.5 file:mr-3 file:rounded-md file:border-0 file:bg-secondary file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-secondary-foreground" />
+                    <x-ui.input type="file" name="poster" accept="image/*" class="mt-1.5" />
                     <p class="mt-1.5 text-sm text-muted-foreground">JPEG, PNG, JPG o GIF, hasta 1&nbsp;MB. Déjalo vacío para conservar el póster actual.</p>
                 </div>
 
