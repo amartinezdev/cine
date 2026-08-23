@@ -58,9 +58,9 @@
 
             <div class="hidden items-center gap-3 md:flex">
                 @auth
-                    <span class="text-sm text-warning">
+                    <a href="{{ route('profile.edit') }}" class="text-sm text-warning transition-colors hover:text-warning/80 hover:underline underline-offset-4">
                         <i class="bi bi-person-circle"></i> {{ auth()->user()->name }}
-                    </span>
+                    </a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <x-ui.button variant="ghost" size="sm" type="submit">
@@ -107,7 +107,7 @@
                         <x-ui.button href="{{ route('admin.dashboard') }}" variant="ghost" size="sm" class="w-full !justify-start"><i class="bi bi-speedometer2"></i> Dashboard</x-ui.button>
                     @endif
                     <div class="my-1 h-px bg-border"></div>
-                    <span class="px-3 py-1 text-sm text-warning"><i class="bi bi-person-circle"></i> {{ auth()->user()->name }}</span>
+                    <x-ui.button href="{{ route('profile.edit') }}" variant="ghost" size="sm" class="w-full !justify-start text-warning hover:text-warning"><i class="bi bi-person-circle"></i> {{ auth()->user()->name }}</x-ui.button>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <x-ui.button variant="ghost" size="sm" type="submit" class="w-full !justify-start"><i class="bi bi-box-arrow-right"></i> Salir</x-ui.button>
