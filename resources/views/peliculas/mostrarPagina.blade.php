@@ -116,7 +116,7 @@
         <x-ui.card.header>
             <x-ui.card.title><i class="bi bi-info-circle text-primary"></i> Información Adicional</x-ui.card.title>
         </x-ui.card.header>
-        <x-ui.card.content class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <x-ui.card.content class="!pt-0 grid grid-cols-1 gap-4 md:grid-cols-3">
             <div>
                 <p class="mb-2"><span class="text-muted-foreground">Género:</span> <span class="text-foreground">{{ $pelicula->genero->nombre }}</span></p>
                 <p class="mb-2"><span class="text-muted-foreground">Duración:</span> <span class="text-foreground">{{ $pelicula->duracion }} minutos</span></p>
