@@ -9,21 +9,15 @@
 
     <div class="space-y-6">
         <x-ui.card>
-            <x-ui.card.content class="p-6">
-                @include('profile.partials.update-profile-information-form')
-            </x-ui.card.content>
+            @include('profile.partials.update-profile-information-form')
         </x-ui.card>
 
         <x-ui.card>
-            <x-ui.card.content class="p-6">
-                @include('profile.partials.update-password-form')
-            </x-ui.card.content>
+            @include('profile.partials.update-password-form')
         </x-ui.card>
 
-        <x-ui.card>
-            <x-ui.card.content class="p-6">
-                @include('profile.partials.delete-user-form')
-            </x-ui.card.content>
+        <x-ui.card class="border-destructive/30">
+            @include('profile.partials.delete-user-form')
         </x-ui.card>
     </div>
 </div>

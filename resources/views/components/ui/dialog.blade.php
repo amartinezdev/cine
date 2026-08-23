@@ -1,7 +1,9 @@
 @props(['autoOpen' => false])
 
 <div x-data="{ open: {{ $autoOpen ? 'true' : 'false' }}, reduceMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches }" x-on:keydown.escape.window="open = false" {{ $attributes }}>
-    <span class="contents" @click="open = true">{{ $trigger }}</span>
+    @isset($trigger)
+        <span class="contents" @click="open = true">{{ $trigger }}</span>
+    @endisset
 
     <template x-teleport="body">
         <div x-show="open" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
