@@ -57,6 +57,7 @@ jobs:
         run: |
           mkdir -p deploy_stage/public_html
           cp -r public/build deploy_stage/public_html/build
+          cp -r public/images deploy_stage/public_html/images
           cp public/.htaccess deploy_stage/public_html/.htaccess
           cp public/favicon.ico deploy_stage/public_html/favicon.ico
           cp public/robots.txt deploy_stage/public_html/robots.txt
